@@ -244,6 +244,46 @@
       white-space: nowrap;
     }
 
+    .analysis-meta-bar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      margin: 16px 0;
+      padding: 12px 14px;
+      border: 1px solid #d9e6ff;
+      border-radius: 8px;
+      background: #f8fbff;
+    }
+
+    .analysis-meta-bar div {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+
+    .analysis-meta-bar strong {
+      font-size: 13px;
+      color: #263241;
+    }
+
+    .analysis-meta-bar span {
+      color: #1d4ed8;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .analysis-meta-bar p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      text-align: right;
+    }
+
     .chart {
       height: 260px;
       display: grid;
@@ -624,7 +664,13 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 12px 0 16px;
+      margin: 12px 0 8px;
+    }
+
+    .competitor-analysis-status {
+      display: block;
+      margin: 0 0 16px;
+      color: var(--muted);
     }
 
     .channel-link-grid {
@@ -1281,6 +1327,14 @@
       main { padding: 16px; }
       .grid {
         gap: 12px;
+      }
+      .analysis-meta-bar {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      .analysis-meta-bar p {
+        text-align: left;
       }
       .panel {
         padding: 14px;

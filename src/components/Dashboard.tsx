@@ -287,10 +287,18 @@ const dashboardHtml = String.raw`
           <div class="panel"><div class="metric-label">ITN 우선 전략</div><div class="metric-value">전문 PT</div><div class="metric-delta up">재활·체형교정·특수목적 고객 선점</div></div>
         </section>
 
+        <section class="analysis-meta-bar" aria-label="경쟁사 분석 기준일">
+          <div>
+            <strong>경쟁사 분석 기준일</strong>
+            <span id="competitor-analysis-date">2026.06.23 00:00</span>
+          </div>
+          <p>채널 검색 또는 재분석을 실행하면 이 날짜가 갱신되어 로컬에 저장됩니다.</p>
+        </section>
+
         <section class="panel">
           <div class="section-title">
             <h2>Brand Radar형 경쟁사 채널 검색</h2>
-            <span class="pill">플레이스·블로그·인스타</span>
+            <span class="pill" data-competitor-analysis-date>분석일 2026.06.23</span>
           </div>
           <div class="competitor-search-grid">
             <label class="form-field">
@@ -311,6 +319,7 @@ const dashboardHtml = String.raw`
             <button class="btn" type="button" data-competitor-search="blog">네이버 블로그 검색</button>
             <button class="btn" type="button" data-competitor-search="instagram">인스타그램 검색</button>
           </div>
+          <p class="save-status competitor-analysis-status" id="competitor-analysis-status">최근 경쟁사 분석일을 확인한 뒤 업무전략에 반영하세요.</p>
           <div class="channel-link-grid">
             <div class="channel-card">
               <strong>ITN피트니스</strong>
@@ -366,7 +375,7 @@ const dashboardHtml = String.raw`
         <section class="panel brand-radar-report">
           <div class="section-title">
             <h2>Brand Radar 비교표</h2>
-            <span class="pill">ITN vs 경쟁사 5곳</span>
+            <span class="pill" data-competitor-analysis-date>분석일 2026.06.23</span>
           </div>
           <div class="radar-score-grid">
             <div><span>네이버 노출력</span><strong>68</strong><small>플레이스·블로그 보완 필요</small></div>
@@ -407,7 +416,7 @@ const dashboardHtml = String.raw`
         </section>
 
         <section class="panel">
-          <div class="section-title"><h2>키워드 노출 현황</h2><span class="pill">Brand Radar 방식</span></div>
+          <div class="section-title"><h2>키워드 노출 현황</h2><span class="pill" data-competitor-analysis-date>분석일 2026.06.23</span></div>
           <table class="brand-radar-table">
             <thead><tr><th>키워드</th><th>ITN 현재 판단</th><th>블로그 우선 경쟁자</th><th>플레이스 우선 경쟁자</th><th>이번 주 액션</th></tr></thead>
             <tbody>
@@ -656,7 +665,7 @@ const dashboardHtml = String.raw`
       <div class="view" data-view-panel="report">
         <section class="grid main-layout">
           <div class="panel">
-            <div class="section-title"><h2>AI 전략 리포트</h2><span class="pill">근거 기반</span></div>
+            <div class="section-title"><h2>AI 전략 리포트</h2><span class="pill" data-competitor-analysis-date>경쟁분석 2026.06.23</span></div>
             <div class="task-list">
               <div class="task"><strong>핵심 문제</strong><p>ITN은 전문성 증거가 강하지만, 경쟁사가 시설·가격·지역 키워드에서 각자 강점을 갖고 있어 채널별 메시지 반복이 필요합니다.</p></div>
               <div class="task"><strong>핵심 전략</strong><p>일반 헬스장 키워드보다 동해 재활PT, 동해 체형교정, 산전산후, 완경기, 키즈PT처럼 구매 의도가 높은 세부 키워드와 재등록 대상 관리를 우선합니다.</p></div>
@@ -914,6 +923,23 @@ type DbStrategyExperiment = {
   note: string | null;
 };
 
+const competitorAnalysisDefaultIso = '2026-06-23T00:00:00+09:00';
+const competitorAnalysisStorageKey = 'gymDashboardCompetitorAnalysisAtV1';
+
+const padDatePart = (value: number) => String(value).padStart(2, '0');
+
+const formatAnalysisDate = (isoDate: string) => {
+  const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) return '2026.06.23';
+  return `${date.getFullYear()}.${padDatePart(date.getMonth() + 1)}.${padDatePart(date.getDate())}`;
+};
+
+const formatAnalysisDateTime = (isoDate: string) => {
+  const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) return '2026.06.23 00:00';
+  return `${formatAnalysisDate(isoDate)} ${padDatePart(date.getHours())}:${padDatePart(date.getMinutes())}`;
+};
+
 const pages = {
   overview: {
     title: '대표 대시보드',
@@ -945,6 +971,32 @@ const staffStorageKey = 'gymDashboardStaffV2';
 const legacyStaffStorageKey = 'gymDashboardStaff';
 const strategyExperimentStorageKey = 'gymDashboardStrategyExperimentsV1';
 const storeId = process.env.NEXT_PUBLIC_SUPABASE_STORE_ID || '00000000-0000-4000-8000-000000000001';
+
+const readCompetitorAnalysisIso = () => {
+  try {
+    return localStorage.getItem(competitorAnalysisStorageKey) || competitorAnalysisDefaultIso;
+  } catch {
+    return competitorAnalysisDefaultIso;
+  }
+};
+
+const writeCompetitorAnalysisIso = (isoDate: string) => {
+  try {
+    localStorage.setItem(competitorAnalysisStorageKey, isoDate);
+  } catch {
+    // Ignore blocked localStorage.
+  }
+};
+
+const getPageSubtitle = (view: keyof typeof pages) => {
+  if (view === 'competitors') {
+    return `${pages.competitors.subtitle} · 분석일 ${formatAnalysisDate(readCompetitorAnalysisIso())}`;
+  }
+  if (view === 'report') {
+    return `${pages.report.subtitle} · 경쟁분석 ${formatAnalysisDate(readCompetitorAnalysisIso())}`;
+  }
+  return pages[view].subtitle;
+};
 
 const salesSampleHeaders = [
   '매출 이름',
@@ -1212,7 +1264,10 @@ const renderSalesSummary = (summary: SalesSummary) => {
     if (element) element.textContent = value;
   };
 
-  setText('#page-subtitle', `${summary.latestMonth} 매출자료 기준 · ${summary.totalRows}건 분석`);
+  const activeView = document.querySelector<HTMLElement>('.view.active')?.dataset.viewPanel;
+  if (!activeView || activeView === 'overview' || activeView === 'sales') {
+    setText('#page-subtitle', `${summary.latestMonth} 매출자료 기준 · ${summary.totalRows}건 분석`);
+  }
   setText('#metric-net-revenue', formatCurrency(summary.netRevenue));
   setText('#metric-net-revenue-delta', `결제 ${formatCurrency(summary.paidRevenue)} · 환불 ${formatCurrency(summary.refundAmount)}`);
   setText('#metric-rereg-rate', formatPercent(summary.reRegistrationRate));
@@ -1473,6 +1528,9 @@ export default function Dashboard() {
     const competitorIndustryInput = document.querySelector<HTMLInputElement>('#competitor-industry-input');
     const competitorNameInput = document.querySelector<HTMLInputElement>('#competitor-name-input');
     const competitorSearchButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-competitor-search]'));
+    const competitorAnalysisDate = document.querySelector<HTMLElement>('#competitor-analysis-date');
+    const competitorAnalysisDatePills = Array.from(document.querySelectorAll<HTMLElement>('[data-competitor-analysis-date]'));
+    const competitorAnalysisStatus = document.querySelector<HTMLElement>('#competitor-analysis-status');
     const strategyForm = document.querySelector<HTMLFormElement>('#strategy-form');
     const strategyIdInput = document.querySelector<HTMLInputElement>('#strategy-id');
     const strategyWeekInput = document.querySelector<HTMLInputElement>('#strategy-week');
@@ -1500,6 +1558,22 @@ export default function Dashboard() {
     const eventController = new AbortController();
     const eventOptions = { signal: eventController.signal };
 
+    const renderCompetitorAnalysisDate = (isoDate = readCompetitorAnalysisIso()) => {
+      const shortDate = formatAnalysisDate(isoDate);
+      if (competitorAnalysisDate) competitorAnalysisDate.textContent = formatAnalysisDateTime(isoDate);
+      competitorAnalysisDatePills.forEach((element) => {
+        element.textContent = element.closest('[data-view-panel="report"]')
+          ? `경쟁분석 ${shortDate}`
+          : `분석일 ${shortDate}`;
+      });
+      if (pageSubtitle) {
+        const activeView = document.querySelector<HTMLElement>('.view.active')?.dataset.viewPanel as keyof typeof pages | undefined;
+        if (activeView === 'competitors' || activeView === 'report') {
+          pageSubtitle.textContent = getPageSubtitle(activeView);
+        }
+      }
+    };
+
     const bindAccountActions = async () => {
       const {
         data: { user },
@@ -1523,6 +1597,8 @@ export default function Dashboard() {
         if (staffNavButton) staffNavButton.style.display = 'none';
       }
     };
+
+    renderCompetitorAnalysisDate();
 
     bindAccountActions();
 
@@ -1585,6 +1661,8 @@ export default function Dashboard() {
         const name = competitorNameInput?.value.trim() || 'ITN피트니스';
         const query = `${region} ${name}`;
         const channel = button.dataset.competitorSearch;
+        const channelLabel = channel === 'place' ? '네이버 플레이스' : channel === 'blog' ? '네이버 블로그' : '인스타그램';
+        const analyzedAt = new Date().toISOString();
         const targetUrl =
           channel === 'place'
             ? `https://map.naver.com/p/search/${encodeURIComponent(query)}`
@@ -1592,6 +1670,11 @@ export default function Dashboard() {
               ? `https://search.naver.com/search.naver?where=blog&query=${encodeURIComponent(`${query} ${industry}`)}`
               : `https://www.instagram.com/explore/search/keyword/?q=${encodeURIComponent(name)}`;
 
+        writeCompetitorAnalysisIso(analyzedAt);
+        renderCompetitorAnalysisDate(analyzedAt);
+        if (competitorAnalysisStatus) {
+          competitorAnalysisStatus.textContent = `${name} ${channelLabel} 검색 실행 · 분석 기준일 ${formatAnalysisDateTime(analyzedAt)}`;
+        }
         window.open(targetUrl, '_blank', 'noopener,noreferrer');
       }, eventOptions);
     });
@@ -1603,7 +1686,7 @@ export default function Dashboard() {
         navButtons.forEach((item) => item.classList.toggle('active', item === button));
         panels.forEach((panel) => panel.classList.toggle('active', panel.dataset.viewPanel === view));
         if (pageTitle) pageTitle.textContent = pages[view].title;
-        if (pageSubtitle) pageSubtitle.textContent = pages[view].subtitle;
+        if (pageSubtitle) pageSubtitle.textContent = getPageSubtitle(view);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }, eventOptions);
     });
