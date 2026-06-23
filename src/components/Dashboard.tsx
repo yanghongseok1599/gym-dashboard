@@ -1900,7 +1900,10 @@ export default function Dashboard() {
         return;
       }
 
-      const id = staffIdInput.value || crypto.randomUUID();
+      // '새 직원 입력' 버튼을 누르지 않아도, 입력한 이름이 기존 직원과 다르면 새로 저장한다.
+      // 같은 이름이면 그 직원을 수정(update), 새 이름이면 새 직원으로 추가(insert).
+      const existingByName = staffMembers.find((member) => member.name === name);
+      const id = existingByName ? existingByName.id : crypto.randomUUID();
       const updated: StaffMember = {
         id,
         name,
