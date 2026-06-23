@@ -37,8 +37,10 @@ const dashboardHtml = String.raw`
           <a class="btn" href="/mypage">마이페이지</a>
           <a class="btn" href="/admin" data-admin-link>관리자페이지</a>
           <button class="btn" type="button" id="logout-button">로그아웃</button>
-          <button class="btn" data-admin-only>샘플 엑셀</button>
-          <button class="btn primary" data-admin-only>매출자료 업로드</button>
+          <button class="btn" type="button" id="sample-sales-download" data-admin-only>샘플 CSV</button>
+          <button class="btn primary" type="button" id="sales-upload-trigger" data-admin-only>매출자료 업로드</button>
+          <input type="file" id="sales-upload-input" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values" hidden>
+          <span class="save-status header-status" id="sales-upload-status"></span>
         </div>
       </header>
 
@@ -46,23 +48,23 @@ const dashboardHtml = String.raw`
         <section class="grid cards">
           <div class="panel">
             <div class="metric-label">이번 달 순매출</div>
-            <div class="metric-value">₩42,800,000</div>
-            <div class="metric-delta up">전월 대비 +12.4%</div>
+            <div class="metric-value" id="metric-net-revenue">₩42,800,000</div>
+            <div class="metric-delta up" id="metric-net-revenue-delta">전월 대비 +12.4%</div>
           </div>
           <div class="panel">
             <div class="metric-label">재등록률</div>
-            <div class="metric-value">38.6%</div>
-            <div class="metric-delta down">목표 대비 -6.4%p</div>
+            <div class="metric-value" id="metric-rereg-rate">38.6%</div>
+            <div class="metric-delta down" id="metric-rereg-delta">목표 대비 -6.4%p</div>
           </div>
           <div class="panel">
             <div class="metric-label">미수금</div>
-            <div class="metric-value">₩3,200,000</div>
-            <div class="metric-delta warn">주의 회원 14명</div>
+            <div class="metric-value" id="metric-receivable">₩3,200,000</div>
+            <div class="metric-delta warn" id="metric-receivable-delta">주의 회원 14명</div>
           </div>
           <div class="panel">
             <div class="metric-label">환불률</div>
-            <div class="metric-value">4.8%</div>
-            <div class="metric-delta up">전월 대비 -1.1%p</div>
+            <div class="metric-value" id="metric-refund-rate">4.8%</div>
+            <div class="metric-delta up" id="metric-refund-delta">전월 대비 -1.1%p</div>
           </div>
         </section>
 
@@ -73,7 +75,7 @@ const dashboardHtml = String.raw`
               <h2>월별 순매출 흐름</h2>
               <span class="pill">최근 12개월</span>
             </div>
-            <div class="chart" aria-label="월별 순매출 막대 그래프">
+            <div class="chart" id="monthly-chart" aria-label="월별 순매출 막대 그래프">
               <div class="bar-wrap"><div class="bar" style="height:52%"></div><span>6월</span></div>
               <div class="bar-wrap"><div class="bar" style="height:58%"></div><span>7월</span></div>
               <div class="bar-wrap"><div class="bar" style="height:61%"></div><span>8월</span></div>
@@ -99,7 +101,7 @@ const dashboardHtml = String.raw`
                 <thead>
                   <tr><th>담당자</th><th>순매출</th><th>재등록</th><th>상태</th></tr>
                 </thead>
-                <tbody>
+                <tbody id="manager-performance-body">
                   <tr><td>김실장</td><td>₩15,400,000</td><td>47%</td><td><span class="status good">강점</span></td></tr>
                   <tr><td>박트레이너</td><td>₩10,200,000</td><td>41%</td><td><span class="status good">안정</span></td></tr>
                   <tr><td>이상담</td><td>₩8,700,000</td><td>29%</td><td><span class="status mid">관리</span></td></tr>
@@ -576,6 +578,35 @@ type DbStaffMember = {
   assignment_note: string | null;
 };
 
+type SalesSummary = {
+  fileName: string;
+  uploadedAt: string;
+  totalRows: number;
+  paidRevenue: number;
+  refundAmount: number;
+  netRevenue: number;
+  receivableAmount: number;
+  unpaidCount: number;
+  reRegistrationCount: number;
+  paidCount: number;
+  refundCount: number;
+  memberCount: number;
+  reRegistrationRate: number;
+  refundRate: number;
+  latestMonth: string;
+  managerStats: Array<{
+    manager: string;
+    netRevenue: number;
+    paidCount: number;
+    reRegistrationCount: number;
+    reRegistrationRate: number;
+  }>;
+  monthlyStats: Array<{
+    month: string;
+    netRevenue: number;
+  }>;
+};
+
 const pages = {
   overview: {
     title: '대표 대시보드',
@@ -607,12 +638,308 @@ const staffStorageKey = 'gymDashboardStaffV2';
 const legacyStaffStorageKey = 'gymDashboardStaff';
 const storeId = process.env.NEXT_PUBLIC_SUPABASE_STORE_ID || '00000000-0000-4000-8000-000000000001';
 
+const salesSampleHeaders = [
+  '매출 이름',
+  '매출 유형',
+  '회원 이름',
+  '연락처',
+  '결제/환불 수단',
+  '판매금액',
+  '결제금액/환불금액',
+  '미수금여부',
+  '결제일/환불일',
+  '결제 담당자',
+  '재등록 여부',
+];
+
+const salesSampleRows = [
+  ['체형교정 PT 20회', '결제', '홍길동', '010-0000-0000', '카드', '1500000', '1500000', 'N', '2026-06-01', '김실장', 'Y'],
+  ['재활 PT 10회', '결제', '김회원', '010-1111-1111', '계좌이체', '900000', '600000', 'Y', '2026-06-02', '박트레이너', 'N'],
+  ['PT 환불', '환불', '이회원', '010-2222-2222', '카드취소', '500000', '200000', 'N', '2026-06-03', '김실장', 'N'],
+];
+
+const allowedSalesFilePattern = /\.(csv|tsv|txt)$/i;
+const maxSalesFileSize = 5 * 1024 * 1024;
+
 const escapeText = (value: string) =>
   String(value || '')
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;');
+
+const formatCurrency = (value: number) => `₩${Math.round(value).toLocaleString('ko-KR')}`;
+
+const formatPercent = (value: number) => `${value.toFixed(1)}%`;
+
+const normalizeHeader = (value: string) => value.replace(/\s+/g, '').replace(/[()]/g, '').toLowerCase();
+
+const parseAmount = (value: string | undefined) => {
+  const raw = String(value || '').trim();
+  if (!raw) return 0;
+  const isWrappedNegative = raw.startsWith('(') && raw.endsWith(')');
+  const numeric = Number(raw.replace(/[₩,\s원]/g, '').replace(/[()]/g, ''));
+  if (Number.isNaN(numeric)) return 0;
+  return isWrappedNegative ? -Math.abs(numeric) : numeric;
+};
+
+const parseDelimitedRows = (text: string) => {
+  const normalized = text.replace(/^\uFEFF/, '');
+  const firstLine = normalized.split(/\r?\n/, 1)[0] || '';
+  const delimiter = (firstLine.match(/\t/g) || []).length > (firstLine.match(/,/g) || []).length ? '\t' : ',';
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let value = '';
+  let quoted = false;
+
+  for (let index = 0; index < normalized.length; index += 1) {
+    const char = normalized[index];
+    const nextChar = normalized[index + 1];
+
+    if (char === '"' && quoted && nextChar === '"') {
+      value += '"';
+      index += 1;
+      continue;
+    }
+
+    if (char === '"') {
+      quoted = !quoted;
+      continue;
+    }
+
+    if (char === delimiter && !quoted) {
+      row.push(value.trim());
+      value = '';
+      continue;
+    }
+
+    if ((char === '\n' || char === '\r') && !quoted) {
+      if (char === '\r' && nextChar === '\n') index += 1;
+      row.push(value.trim());
+      if (row.some((cell) => cell)) rows.push(row);
+      row = [];
+      value = '';
+      continue;
+    }
+
+    value += char;
+  }
+
+  row.push(value.trim());
+  if (row.some((cell) => cell)) rows.push(row);
+  return rows;
+};
+
+const getColumn = (row: Record<string, string>, candidates: string[]) => {
+  for (const candidate of candidates) {
+    const value = row[normalizeHeader(candidate)];
+    if (value !== undefined) return value;
+  }
+  return '';
+};
+
+const isTruthyCell = (value: string) => /^(y|yes|true|1|o|예|네|재등록|있음|미수)$/i.test(value.trim());
+
+const monthLabel = (dateValue: string) => {
+  const normalized = dateValue.trim().replace(/[.]/g, '-').replace(/\//g, '-');
+  const match = normalized.match(/^(\d{4})-(\d{1,2})/);
+  if (match) return `${match[1]}-${match[2].padStart(2, '0')}`;
+  const date = new Date(dateValue);
+  if (!Number.isNaN(date.getTime())) return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+  return '날짜 없음';
+};
+
+const analyzeSalesText = (fileName: string, text: string): SalesSummary => {
+  const rows = parseDelimitedRows(text);
+  if (rows.length < 2) {
+    throw new Error('헤더와 매출 행이 있는 CSV/TSV 파일을 업로드하세요.');
+  }
+
+  const headers = rows[0].map(normalizeHeader);
+  const requiredColumnGroups = [
+    ['결제금액/환불금액', '결제금액', '환불금액', '결제 금액', '환불 금액'],
+    ['결제일/환불일', '결제일', '환불일', '일자'],
+    ['결제 담당자', '담당자', '직원'],
+  ];
+  const missingColumns = requiredColumnGroups
+    .filter((candidates) => !candidates.some((candidate) => headers.includes(normalizeHeader(candidate))))
+    .map((candidates) => candidates[0]);
+
+  if (missingColumns.length) {
+    throw new Error(`필수 헤더가 없습니다: ${missingColumns.join(', ')}`);
+  }
+
+  const dataRows = rows.slice(1).map((cells) =>
+    Object.fromEntries(headers.map((header, index) => [header, cells[index] || ''])) as Record<string, string>,
+  );
+
+  const managerMap = new Map<string, SalesSummary['managerStats'][number]>();
+  const monthMap = new Map<string, number>();
+  const members = new Set<string>();
+  let paidRevenue = 0;
+  let refundAmount = 0;
+  let receivableAmount = 0;
+  let unpaidCount = 0;
+  let reRegistrationCount = 0;
+  let paidCount = 0;
+  let refundCount = 0;
+
+  dataRows.forEach((row) => {
+    const salesName = getColumn(row, ['매출 이름', '매출명', '상품명']);
+    const salesType = getColumn(row, ['매출 유형', '유형', '구분']);
+    const memberName = getColumn(row, ['회원 이름', '회원명', '고객명']);
+    const phone = getColumn(row, ['연락처', '전화번호']);
+    const method = getColumn(row, ['결제/환불 수단', '결제수단', '환불수단']);
+    const listPrice = parseAmount(getColumn(row, ['판매금액', '판매 금액']));
+    const paidOrRefund = parseAmount(getColumn(row, ['결제금액/환불금액', '결제금액', '환불금액', '결제 금액', '환불 금액']));
+    const unpaid = getColumn(row, ['미수금여부', '미수금 여부', '미수 여부']);
+    const date = getColumn(row, ['결제일/환불일', '결제일', '환불일', '일자']);
+    const manager = getColumn(row, ['결제 담당자', '담당자', '직원']) || '담당자 미입력';
+    const reRegistration = getColumn(row, ['재등록 여부', '재등록여부', '재등록']);
+    const rowText = `${salesName} ${salesType} ${method}`;
+    const isRefund = /환불|취소/.test(rowText) || paidOrRefund < 0;
+    const netAmount = isRefund ? -Math.abs(paidOrRefund) : Math.max(paidOrRefund, 0);
+    const month = monthLabel(date);
+
+    if (isRefund) {
+      refundAmount += Math.abs(paidOrRefund);
+      refundCount += 1;
+    } else {
+      paidRevenue += Math.max(paidOrRefund, 0);
+      paidCount += 1;
+    }
+
+    if (isTruthyCell(unpaid)) {
+      unpaidCount += 1;
+      receivableAmount += Math.max(listPrice - Math.max(paidOrRefund, 0), 0) || Math.max(listPrice, 0);
+    }
+
+    if (!isRefund && isTruthyCell(reRegistration)) reRegistrationCount += 1;
+    if (memberName || phone) members.add(phone || memberName);
+
+    const currentManager = managerMap.get(manager) || {
+      manager,
+      netRevenue: 0,
+      paidCount: 0,
+      reRegistrationCount: 0,
+      reRegistrationRate: 0,
+    };
+    currentManager.netRevenue += netAmount;
+    if (!isRefund) currentManager.paidCount += 1;
+    if (!isRefund && isTruthyCell(reRegistration)) currentManager.reRegistrationCount += 1;
+    managerMap.set(manager, currentManager);
+    monthMap.set(month, (monthMap.get(month) || 0) + netAmount);
+  });
+
+  const managerStats = Array.from(managerMap.values())
+    .map((item) => ({
+      ...item,
+      reRegistrationRate: item.paidCount ? (item.reRegistrationCount / item.paidCount) * 100 : 0,
+    }))
+    .sort((left, right) => right.netRevenue - left.netRevenue);
+  const monthlyStats = Array.from(monthMap.entries())
+    .map(([month, netRevenue]) => ({ month, netRevenue }))
+    .sort((left, right) => left.month.localeCompare(right.month));
+
+  return {
+    fileName,
+    uploadedAt: new Date().toISOString(),
+    totalRows: dataRows.length,
+    paidRevenue,
+    refundAmount,
+    netRevenue: paidRevenue - refundAmount,
+    receivableAmount,
+    unpaidCount,
+    reRegistrationCount,
+    paidCount,
+    refundCount,
+    memberCount: members.size,
+    reRegistrationRate: paidCount ? (reRegistrationCount / paidCount) * 100 : 0,
+    refundRate: paidRevenue ? (refundAmount / paidRevenue) * 100 : 0,
+    latestMonth: monthlyStats.at(-1)?.month || '업로드 자료',
+    managerStats,
+    monthlyStats,
+  };
+};
+
+const downloadSalesSample = () => {
+  const csv = [salesSampleHeaders, ...salesSampleRows]
+    .map((row) => row.map((cell) => `"${String(cell).replaceAll('"', '""')}"`).join(','))
+    .join('\n');
+  const blob = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'gym-dashboard-sales-sample.csv';
+  link.click();
+  URL.revokeObjectURL(url);
+};
+
+const renderSalesSummary = (summary: SalesSummary) => {
+  const setText = (selector: string, value: string) => {
+    const element = document.querySelector<HTMLElement>(selector);
+    if (element) element.textContent = value;
+  };
+
+  setText('#page-subtitle', `${summary.latestMonth} 매출자료 기준 · ${summary.totalRows}건 분석`);
+  setText('#metric-net-revenue', formatCurrency(summary.netRevenue));
+  setText('#metric-net-revenue-delta', `결제 ${formatCurrency(summary.paidRevenue)} · 환불 ${formatCurrency(summary.refundAmount)}`);
+  setText('#metric-rereg-rate', formatPercent(summary.reRegistrationRate));
+  setText('#metric-rereg-delta', `재등록 ${summary.reRegistrationCount}건 / 결제 ${summary.paidCount}건`);
+  setText('#metric-receivable', formatCurrency(summary.receivableAmount));
+  setText('#metric-receivable-delta', `미수 표시 ${summary.unpaidCount}건`);
+  setText('#metric-refund-rate', formatPercent(summary.refundRate));
+  setText('#metric-refund-delta', `환불 ${summary.refundCount}건`);
+
+  const managerBody = document.querySelector<HTMLTableSectionElement>('#manager-performance-body');
+  if (managerBody) {
+    managerBody.innerHTML = summary.managerStats.length
+      ? summary.managerStats.slice(0, 6).map((item) => `
+        <tr>
+          <td>${escapeText(item.manager)}</td>
+          <td>${formatCurrency(item.netRevenue)}</td>
+          <td>${formatPercent(item.reRegistrationRate)}</td>
+          <td><span class="status ${item.netRevenue >= 0 ? 'good' : 'bad'}">${item.netRevenue >= 0 ? '확인' : '환불주의'}</span></td>
+        </tr>
+      `).join('')
+      : '<tr><td colspan="4">담당자 데이터가 없습니다.</td></tr>';
+  }
+
+  const monthlyChart = document.querySelector<HTMLElement>('#monthly-chart');
+  if (monthlyChart && summary.monthlyStats.length) {
+    const maxRevenue = Math.max(...summary.monthlyStats.map((item) => Math.abs(item.netRevenue)), 1);
+    monthlyChart.innerHTML = summary.monthlyStats.slice(-12).map((item) => {
+      const height = Math.max(8, Math.round((Math.abs(item.netRevenue) / maxRevenue) * 100));
+      const label = item.month === '날짜 없음' ? '미입력' : `${Number(item.month.slice(5))}월`;
+      return `<div class="bar-wrap"><div class="bar" style="height:${height}%"></div><span>${escapeText(label)}</span></div>`;
+    }).join('');
+  }
+};
+
+const loadLatestSalesSummary = async () => {
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from('sales_uploads')
+    .select('file_name,uploaded_at,summary_json')
+    .eq('store_id', storeId)
+    .order('uploaded_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error || !data?.summary_json) return null;
+  return data.summary_json as SalesSummary;
+};
+
+const saveSalesSummary = async (summary: SalesSummary) => {
+  const supabase = getSupabaseClient();
+  const { error } = await supabase.from('sales_uploads').insert({
+    store_id: storeId,
+    file_name: summary.fileName,
+    summary_json: summary,
+  });
+
+  if (error) throw error;
+};
 
 const loadStaff = (): StaffMember[] => {
   try {
@@ -701,8 +1028,14 @@ export default function Dashboard() {
     const adminLink = document.querySelector<HTMLAnchorElement>('[data-admin-link]');
     const adminOnlyElements = Array.from(document.querySelectorAll<HTMLElement>('[data-admin-only]'));
     const staffNavButton = document.querySelector<HTMLButtonElement>('nav button[data-view="staff"]');
+    const sampleSalesButton = document.querySelector<HTMLButtonElement>('#sample-sales-download');
+    const salesUploadTrigger = document.querySelector<HTMLButtonElement>('#sales-upload-trigger');
+    const salesUploadInput = document.querySelector<HTMLInputElement>('#sales-upload-input');
+    const salesUploadStatus = document.querySelector<HTMLElement>('#sales-upload-status');
 
     const supabase = getSupabaseClient();
+    const eventController = new AbortController();
+    const eventOptions = { signal: eventController.signal };
 
     const bindAccountActions = async () => {
       const {
@@ -730,10 +1063,58 @@ export default function Dashboard() {
 
     bindAccountActions();
 
+    loadLatestSalesSummary()
+      .then((summary) => {
+        if (!summary) return;
+        renderSalesSummary(summary);
+        if (salesUploadStatus) salesUploadStatus.textContent = `${summary.fileName} 분석자료 반영`;
+      })
+      .catch(() => {
+        if (salesUploadStatus) salesUploadStatus.textContent = '최근 매출자료를 불러오지 못했습니다.';
+      });
+
     logoutButton?.addEventListener('click', async () => {
       await supabase.auth.signOut();
       window.location.href = '/login';
-    });
+    }, eventOptions);
+
+    sampleSalesButton?.addEventListener('click', downloadSalesSample, eventOptions);
+
+    salesUploadTrigger?.addEventListener('click', () => {
+      salesUploadInput?.click();
+    }, eventOptions);
+
+    salesUploadInput?.addEventListener('change', async () => {
+      const file = salesUploadInput.files?.[0];
+      if (!file) return;
+      if (!allowedSalesFilePattern.test(file.name)) {
+        if (salesUploadStatus) salesUploadStatus.textContent = 'CSV, TSV, TXT 파일만 업로드할 수 있습니다.';
+        salesUploadInput.value = '';
+        return;
+      }
+
+      if (file.size > maxSalesFileSize) {
+        if (salesUploadStatus) salesUploadStatus.textContent = '매출자료 파일은 5MB 이하로 업로드하세요.';
+        salesUploadInput.value = '';
+        return;
+      }
+
+      if (salesUploadStatus) salesUploadStatus.textContent = `${file.name} 분석 중입니다.`;
+
+      try {
+        const text = await file.text();
+        const summary = analyzeSalesText(file.name, text);
+        renderSalesSummary(summary);
+        if (salesUploadStatus) salesUploadStatus.textContent = `${file.name} 화면 반영 완료 · Supabase 저장 중`;
+        await saveSalesSummary(summary);
+        if (salesUploadStatus) salesUploadStatus.textContent = `${file.name} 분석과 저장이 완료되었습니다.`;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : '매출자료 분석 중 오류가 발생했습니다.';
+        if (salesUploadStatus) salesUploadStatus.textContent = message;
+      } finally {
+        salesUploadInput.value = '';
+      }
+    }, eventOptions);
 
     navButtons.forEach((button) => {
       button.addEventListener('click', () => {
@@ -744,7 +1125,7 @@ export default function Dashboard() {
         if (pageTitle) pageTitle.textContent = pages[view].title;
         if (pageSubtitle) pageSubtitle.textContent = pages[view].subtitle;
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+      }, eventOptions);
     });
 
     try {
@@ -773,7 +1154,9 @@ export default function Dashboard() {
     const staffMainKpi = document.querySelector<HTMLElement>('#staff-main-kpi');
     const staffMainNote = document.querySelector<HTMLElement>('#staff-main-note');
 
-    if (!staffForm || !staffIdInput || !staffNameInput || !staffRoleInput || !staffTypeInput || !staffScheduleInput || !staffStrengthInput || !staffKpiInput || !staffNoteInput || !staffTableBody || !staffWorkBody || !staffSaveButton || !staffResetButton || !staffSaveStatus) return;
+    if (!staffForm || !staffIdInput || !staffNameInput || !staffRoleInput || !staffTypeInput || !staffScheduleInput || !staffStrengthInput || !staffKpiInput || !staffNoteInput || !staffTableBody || !staffWorkBody || !staffSaveButton || !staffResetButton || !staffSaveStatus) {
+      return () => eventController.abort();
+    }
 
     let staffMembers = loadStaff();
 
@@ -930,15 +1313,15 @@ export default function Dashboard() {
     staffForm.addEventListener('submit', (event) => {
       event.preventDefault();
       saveStaffFromForm();
-    });
-    staffSaveButton.addEventListener('click', saveStaffFromForm);
+    }, eventOptions);
+    staffSaveButton.addEventListener('click', saveStaffFromForm, eventOptions);
     staffNameInput.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
         event.preventDefault();
         saveStaffFromForm();
       }
-    });
-    staffResetButton.addEventListener('click', clearStaffForm);
+    }, eventOptions);
+    staffResetButton.addEventListener('click', clearStaffForm, eventOptions);
     staffTableBody.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
       const editButton = target.closest<HTMLElement>('[data-staff-edit]');
@@ -949,7 +1332,9 @@ export default function Dashboard() {
 
       const deleteButton = target.closest<HTMLElement>('[data-staff-delete]');
       if (deleteButton?.dataset.staffDelete) deleteStaff(deleteButton.dataset.staffDelete);
-    });
+    }, eventOptions);
+
+    return () => eventController.abort();
   }, []);
 
   return <div dangerouslySetInnerHTML={{ __html: dashboardHtml }} />;
