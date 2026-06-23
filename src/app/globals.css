@@ -503,6 +503,116 @@
       line-height: 1.55;
     }
 
+    .competitor-search-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .channel-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+
+    .channel-link-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .channel-card {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+    }
+
+    .channel-card strong {
+      font-size: 13px;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .channel-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .channel-buttons .table-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+
+    .brand-radar-report {
+      display: grid;
+      gap: 14px;
+    }
+
+    .radar-score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .radar-score-grid div {
+      display: grid;
+      gap: 4px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fafc;
+    }
+
+    .radar-score-grid span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .radar-score-grid strong {
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .radar-score-grid small {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .brand-radar-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .brand-radar-table {
+      min-width: 920px;
+    }
+
+    .brand-radar-table th,
+    .brand-radar-table td {
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    .brand-radar-table tbody td:first-child {
+      color: #1f2937;
+      font-weight: 800;
+      background: #fbfcfe;
+    }
+
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -992,6 +1102,8 @@
       .cards { grid-template-columns: repeat(2, 1fr); }
       .main-layout, .two-col, .competitor-deep { grid-template-columns: 1fr; }
       .evidence-grid { grid-template-columns: 1fr; }
+      .channel-link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .radar-score-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .profile-layout { grid-template-columns: 1fr; }
     }
 
@@ -1045,6 +1157,14 @@
       }
       .cards { grid-template-columns: 1fr; }
       .form-grid { grid-template-columns: 1fr; }
+      .competitor-search-grid,
+      .channel-link-grid,
+      .radar-score-grid {
+        grid-template-columns: 1fr;
+      }
+      .channel-actions .btn {
+        flex: 1 1 160px;
+      }
       main { padding: 16px; }
       .grid {
         gap: 12px;
@@ -1099,6 +1219,16 @@
       .compact-list {
         font-size: 12px;
         line-height: 1.5;
+      }
+      .channel-card {
+        padding: 10px;
+      }
+      .channel-card strong,
+      .brand-radar-table {
+        font-size: 12px;
+      }
+      .radar-score-grid strong {
+        font-size: 21px;
       }
       .competitor-head {
         display: grid;

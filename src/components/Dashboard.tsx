@@ -286,6 +286,139 @@ const dashboardHtml = String.raw`
           <div class="panel"><div class="metric-label">ITN 우선 전략</div><div class="metric-value">전문 PT</div><div class="metric-delta up">재활·체형교정·특수목적 고객 선점</div></div>
         </section>
 
+        <section class="panel">
+          <div class="section-title">
+            <h2>Brand Radar형 경쟁사 채널 검색</h2>
+            <span class="pill">플레이스·블로그·인스타</span>
+          </div>
+          <div class="competitor-search-grid">
+            <label class="form-field">
+              <span>지역</span>
+              <input id="competitor-region-input" value="강원도 동해시" placeholder="예: 강원도 동해시">
+            </label>
+            <label class="form-field">
+              <span>업종 키워드</span>
+              <input id="competitor-industry-input" value="피트니스" placeholder="예: 피트니스, 헬스장, PT">
+            </label>
+            <label class="form-field full">
+              <span>경쟁사명 직접 입력</span>
+              <input id="competitor-name-input" value="트리트라움피트니스" placeholder="경쟁사명을 입력하면 아래 검색 버튼으로 바로 열 수 있습니다.">
+            </label>
+          </div>
+          <div class="channel-actions">
+            <button class="btn" type="button" data-competitor-search="place">네이버 플레이스 검색</button>
+            <button class="btn" type="button" data-competitor-search="blog">네이버 블로그 검색</button>
+            <button class="btn" type="button" data-competitor-search="instagram">인스타그램 검색</button>
+          </div>
+          <div class="channel-link-grid">
+            <div class="channel-card">
+              <strong>ITN피트니스</strong>
+              <div class="channel-buttons">
+                <a class="table-action" href="https://map.naver.com/p/search/ITN%20%ED%94%BC%ED%8A%B8%EB%8B%88%EC%8A%A4" target="_blank" rel="noreferrer">플레이스</a>
+                <a class="table-action" href="https://blog.naver.com/wgym7987" target="_blank" rel="noreferrer">블로그</a>
+                <a class="table-action" href="https://www.instagram.com/itnfitness_/" target="_blank" rel="noreferrer">인스타</a>
+              </div>
+            </div>
+            <div class="channel-card">
+              <strong>트리트라움피트니스</strong>
+              <div class="channel-buttons">
+                <a class="table-action" href="https://map.naver.com/p/search/%EA%B0%95%EC%9B%90%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EB%8F%99%ED%95%B4%EC%8B%9C%20%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%9D%BC%EC%9B%80%ED%94%BC%ED%8A%B8%EB%8B%88%EC%8A%A4" target="_blank" rel="noreferrer">플레이스</a>
+                <a class="table-action" href="https://blog.naver.com/flatgrey" target="_blank" rel="noreferrer">블로그</a>
+                <a class="table-action" href="https://www.instagram.com/rabia_fitness/" target="_blank" rel="noreferrer">인스타</a>
+              </div>
+            </div>
+            <div class="channel-card">
+              <strong>디엠휘트니스 대동점</strong>
+              <div class="channel-buttons">
+                <a class="table-action" href="https://map.naver.com/p/search/%EA%B0%95%EC%9B%90%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EB%8F%99%ED%95%B4%EC%8B%9C%20%EB%94%94%EC%97%A0%ED%9C%98%ED%8A%B8%EB%8B%88%EC%8A%A4%20%EB%8C%80%EB%8F%99%EC%A0%90" target="_blank" rel="noreferrer">플레이스</a>
+                <a class="table-action" href="https://blog.naver.com/dmfitness2" target="_blank" rel="noreferrer">블로그</a>
+                <a class="table-action" href="https://www.instagram.com/dm.fitness_official/" target="_blank" rel="noreferrer">인스타</a>
+              </div>
+            </div>
+            <div class="channel-card">
+              <strong>엘루나짐 천곡점</strong>
+              <div class="channel-buttons">
+                <a class="table-action" href="https://map.naver.com/p/search/%EA%B0%95%EC%9B%90%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EB%8F%99%ED%95%B4%EC%8B%9C%20%EC%97%98%EB%A3%A8%EB%82%98%EC%A7%90%20%EC%B2%9C%EA%B3%A1%EC%A0%90" target="_blank" rel="noreferrer">플레이스</a>
+                <a class="table-action" href="https://blog.naver.com/wjstkdwns52" target="_blank" rel="noreferrer">블로그</a>
+                <a class="table-action" href="https://www.instagram.com/eluna_gym/" target="_blank" rel="noreferrer">인스타</a>
+              </div>
+            </div>
+            <div class="channel-card">
+              <strong>엘루나짐 대동점</strong>
+              <div class="channel-buttons">
+                <a class="table-action" href="https://map.naver.com/p/search/%EA%B0%95%EC%9B%90%EB%8F%84%20%EB%8F%99%ED%95%B4%EC%8B%9C%20%EC%97%98%EB%A3%A8%EB%82%98%EC%A7%90%20%EB%8C%80%EB%8F%99%EC%A0%90" target="_blank" rel="noreferrer">플레이스</a>
+                <a class="table-action" href="https://blog.naver.com/whdrua7583" target="_blank" rel="noreferrer">블로그</a>
+                <a class="table-action" href="https://www.instagram.com/eluna_gym/" target="_blank" rel="noreferrer">인스타</a>
+              </div>
+            </div>
+            <div class="channel-card">
+              <strong>팀터틀랫 강원동해점</strong>
+              <div class="channel-buttons">
+                <a class="table-action" href="https://map.naver.com/p/search/%EA%B0%95%EC%9B%90%EB%8F%84%20%EB%8F%99%ED%95%B4%EC%8B%9C%20%ED%8C%80%ED%84%B0%ED%8B%80%EB%9E%AB%20%EA%B0%95%EC%9B%90%EB%8F%99%ED%95%B4%EC%A0%90" target="_blank" rel="noreferrer">플레이스</a>
+                <a class="table-action" href="https://blog.naver.com/tsports2017" target="_blank" rel="noreferrer">블로그</a>
+                <a class="table-action" href="https://www.instagram.com/king_leehyunho/" target="_blank" rel="noreferrer">인스타</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel brand-radar-report">
+          <div class="section-title">
+            <h2>Brand Radar 비교표</h2>
+            <span class="pill">ITN vs 경쟁사 5곳</span>
+          </div>
+          <div class="radar-score-grid">
+            <div><span>네이버 노출력</span><strong>68</strong><small>플레이스·블로그 보완 필요</small></div>
+            <div><span>인스타 영향력</span><strong>54</strong><small>전문 메시지 반복 부족</small></div>
+            <div><span>신뢰도</span><strong>82</strong><small>전문성 증거 강점</small></div>
+            <div><span>전환력</span><strong>61</strong><small>평가형 체험권 필요</small></div>
+          </div>
+          <div class="brand-radar-table-wrap">
+            <table class="brand-radar-table">
+              <thead><tr><th>네이버 플레이스</th><th>ITN</th><th>트리트라움</th><th>DM</th><th>엘루나 천곡</th><th>엘루나 대동</th><th>팀터틀랫</th></tr></thead>
+              <tbody>
+                <tr><td>핵심 포지션</td><td>전문 PT·재활·체형교정</td><td>대형시설·24시간</td><td>저가·일일권</td><td>지역 헬스/PT</td><td>다지점 접근성</td><td>본사형 안정감</td></tr>
+                <tr><td>첫 비교 강점</td><td>대표/강사진 전문성</td><td>규모·프리미엄 머신</td><td>가격·운영시간</td><td>키워드 반복 노출</td><td>브랜드 반복 노출</td><td>운영 신뢰</td></tr>
+                <tr><td>ITN 대응</td><td>평가 장면·전문 자격 첫 화면 배치</td><td>방치되지 않는 전문관리</td><td>가격보다 결과 리포트</td><td>세부 증상 키워드</td><td>케이스형 후기</td><td>강사진별 전문 분야</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="brand-radar-table-wrap">
+            <table class="brand-radar-table">
+              <thead><tr><th>네이버 블로그</th><th>ITN</th><th>트리트라움</th><th>DM</th><th>엘루나 천곡</th><th>엘루나 대동</th><th>팀터틀랫</th></tr></thead>
+              <tbody>
+                <tr><td>채널</td><td>wgym7987</td><td>flatgrey</td><td>dmfitness2</td><td>wjstkdwns52</td><td>whdrua7583</td><td>tsports2017</td></tr>
+                <tr><td>콘텐츠 성격</td><td>전문성·수업 메시지 강화 필요</td><td>시설/리뷰성</td><td>이벤트·할인</td><td>운동정보·질문형</td><td>건강상식형</td><td>운영/생활형</td></tr>
+                <tr><td>선점 키워드</td><td>동해 재활PT·체형교정</td><td>대형 헬스장</td><td>저가 헬스·일일권</td><td>동해헬스장·동해PT</td><td>동해헬스·건강정보</td><td>브랜드형 PT</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="brand-radar-table-wrap">
+            <table class="brand-radar-table">
+              <thead><tr><th>인스타그램</th><th>ITN</th><th>트리트라움</th><th>DM</th><th>엘루나 천곡</th><th>엘루나 대동</th><th>팀터틀랫</th></tr></thead>
+              <tbody>
+                <tr><td>계정</td><td>@itnfitness_</td><td>@rabia_fitness</td><td>@dm.fitness_official</td><td>@eluna_gym</td><td>@eluna_gym</td><td>@king_leehyunho</td></tr>
+                <tr><td>강점</td><td>전문 수업 증거화 가능</td><td>PT 스튜디오 톤</td><td>공식 이벤트 톤</td><td>지역 해시태그 반복</td><td>공용 브랜드 노출</td><td>개인 신뢰감</td></tr>
+                <tr><td>ITN 액션</td><td>평가 릴스·강사진 캐러셀</td><td>대형센터 실패 고객 흡수</td><td>체험권 리포트 CTA</td><td>세부 목적 해시태그</td><td>케이스 카드뉴스</td><td>강사별 전문 시리즈</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title"><h2>키워드 노출 현황</h2><span class="pill">Brand Radar 방식</span></div>
+          <table class="brand-radar-table">
+            <thead><tr><th>키워드</th><th>ITN 현재 판단</th><th>블로그 우선 경쟁자</th><th>플레이스 우선 경쟁자</th><th>이번 주 액션</th></tr></thead>
+            <tbody>
+              <tr><td>동해PT</td><td>전문성은 강하나 반복 노출 부족</td><td>엘루나짐 천곡점</td><td>엘루나짐/DM</td><td>체형평가 PT 글 3개</td></tr>
+              <tr><td>동해헬스장</td><td>시설형 키워드 경쟁 불리</td><td>엘루나짐</td><td>트리트라움</td><td>일반 헬스장 대신 전문 PT로 회피</td></tr>
+              <tr><td>동해 재활PT</td><td>ITN이 선점해야 할 핵심 키워드</td><td>미약</td><td>미약</td><td>대표 전문성 글·릴스 집중</td></tr>
+              <tr><td>동해 체형교정</td><td>구매 의도 높은 방어 키워드</td><td>엘루나짐 정보형 글</td><td>PT 센터 전반</td><td>전후 평가표 콘텐츠화</td></tr>
+              <tr><td>동해 키즈PT</td><td>경쟁 낮고 차별화 가능</td><td>약함</td><td>약함</td><td>부모 상담형 블로그 예약</td></tr>
+            </tbody>
+          </table>
+        </section>
+
         <section class="grid two-col">
           <div class="panel">
             <div class="section-title"><h2>경쟁 구도 핵심 판단</h2><span class="pill">대표 의사결정</span></div>
@@ -1032,6 +1165,10 @@ export default function Dashboard() {
     const salesUploadTrigger = document.querySelector<HTMLButtonElement>('#sales-upload-trigger');
     const salesUploadInput = document.querySelector<HTMLInputElement>('#sales-upload-input');
     const salesUploadStatus = document.querySelector<HTMLElement>('#sales-upload-status');
+    const competitorRegionInput = document.querySelector<HTMLInputElement>('#competitor-region-input');
+    const competitorIndustryInput = document.querySelector<HTMLInputElement>('#competitor-industry-input');
+    const competitorNameInput = document.querySelector<HTMLInputElement>('#competitor-name-input');
+    const competitorSearchButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-competitor-search]'));
 
     const supabase = getSupabaseClient();
     const eventController = new AbortController();
@@ -1115,6 +1252,24 @@ export default function Dashboard() {
         salesUploadInput.value = '';
       }
     }, eventOptions);
+
+    competitorSearchButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const region = competitorRegionInput?.value.trim() || '강원도 동해시';
+        const industry = competitorIndustryInput?.value.trim() || '피트니스';
+        const name = competitorNameInput?.value.trim() || 'ITN피트니스';
+        const query = `${region} ${name}`;
+        const channel = button.dataset.competitorSearch;
+        const targetUrl =
+          channel === 'place'
+            ? `https://map.naver.com/p/search/${encodeURIComponent(query)}`
+            : channel === 'blog'
+              ? `https://search.naver.com/search.naver?where=blog&query=${encodeURIComponent(`${query} ${industry}`)}`
+              : `https://www.instagram.com/explore/search/keyword/?q=${encodeURIComponent(name)}`;
+
+        window.open(targetUrl, '_blank', 'noopener,noreferrer');
+      }, eventOptions);
+    });
 
     navButtons.forEach((button) => {
       button.addEventListener('click', () => {
