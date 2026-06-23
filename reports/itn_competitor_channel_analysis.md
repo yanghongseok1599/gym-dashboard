@@ -24,12 +24,12 @@
 확인된 공개 타이틀:
 
 - ITN 인스타그램: `ITN피트니스 (#동해시헬스 #동해시PT #동해시체형교정)`
-- 트리트라움 인스타그램: `라비아 피트니스 <1:1PT 전문 스튜디오>`
+- 트리트라움 인스타그램: `트리트라움 웰니스 피트니스`
 - DM 인스타그램: `디엠휘트니스(#DM휘트니스#동해시#동해시헬스#동해시pt)`
 - 엘루나짐 인스타그램: `엘루나짐 천곡점_#동해헬스장 #동해헬스 #동해PT`
 - 팀터틀랫 인스타그램: `이현호`
 - ITN 블로그: `ITN FITNESS & ITN PILATES`
-- 트리트라움 연결 블로그: `EDFI.`
+- 트리트라움 블로그: 공식 블로그 미확인, 네이버 블로그 검색 결과 기준 모니터링
 - DM 블로그: `동해시 DM휘트니스 대동점`
 - 엘루나짐 천곡점 블로그: `동해 헬스 엘루나짐`
 - 엘루나짐 대동점 블로그: `ELUNA GYM`
@@ -66,8 +66,8 @@ ITN의 핵심 차별화 방향:
 채널:
 
 - 홈페이지: https://www.treetaum.com/
-- 네이버 블로그: https://blog.naver.com/flatgrey
-- 인스타그램: https://www.instagram.com/rabia_fitness/
+- 네이버 블로그: 공식 블로그 미확인, 검색 링크 기준 https://search.naver.com/search.naver?where=blog&query=%EA%B0%95%EC%9B%90%20%EB%8F%99%ED%95%B4%20%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%9D%BC%EC%9B%80%ED%94%BC%ED%8A%B8%EB%8B%88%EC%8A%A4
+- 인스타그램: https://www.instagram.com/treetraum_fitness/
 
 공개 신호:
 
@@ -86,7 +86,7 @@ ITN의 핵심 차별화 방향:
 
 약점:
 
-- 인스타그램 연결 계정명이 `rabia_fitness`이고 타이틀도 `1:1PT 전문 스튜디오`라 트리트라움 본체와 채널명이 직관적으로 일치하지 않는다.
+- 공식 인스타그램은 강하지만 공식 블로그가 확인되지 않아 블로그 검색 점유는 별도 모니터링이 필요하다.
 - 대형 시설 중심이라 재활·체형교정 전문성, 대표 직접 수업, 끝까지 동일 강사 같은 “개인 맞춤 신뢰” 메시지는 ITN이 더 강하게 가져갈 수 있다.
 
 ITN 대응:
@@ -363,8 +363,8 @@ ITN 현재 타이틀:
 - ITN 블로그: https://blog.naver.com/wgym7987
 - ITN 인스타그램: https://www.instagram.com/itnfitness_/
 - 트리트라움 공식 홈페이지: https://www.treetaum.com/
-- 트리트라움 블로그: https://blog.naver.com/flatgrey
-- 트리트라움 인스타그램: https://www.instagram.com/rabia_fitness/
+- 트리트라움 블로그 검색: https://search.naver.com/search.naver?where=blog&query=%EA%B0%95%EC%9B%90%20%EB%8F%99%ED%95%B4%20%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%9D%BC%EC%9B%80%ED%94%BC%ED%8A%B8%EB%8B%88%EC%8A%A4
+- 트리트라움 인스타그램: https://www.instagram.com/treetraum_fitness/
 - DM 블로그: https://blog.naver.com/dmfitness2
 - DM 인스타그램: https://www.instagram.com/dm.fitness_official/
 - 엘루나짐 천곡점 블로그: https://blog.naver.com/wjstkdwns52

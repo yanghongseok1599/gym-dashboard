@@ -323,8 +323,8 @@ const dashboardHtml = String.raw`
               <strong>트리트라움피트니스</strong>
               <div class="channel-buttons">
                 <a class="table-action" href="https://map.naver.com/p/search/%EA%B0%95%EC%9B%90%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EB%8F%99%ED%95%B4%EC%8B%9C%20%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%9D%BC%EC%9B%80%ED%94%BC%ED%8A%B8%EB%8B%88%EC%8A%A4" target="_blank" rel="noreferrer">플레이스</a>
-                <a class="table-action" href="https://blog.naver.com/flatgrey" target="_blank" rel="noreferrer">블로그</a>
-                <a class="table-action" href="https://www.instagram.com/rabia_fitness/" target="_blank" rel="noreferrer">인스타</a>
+                <a class="table-action" href="https://search.naver.com/search.naver?where=blog&query=%EA%B0%95%EC%9B%90%20%EB%8F%99%ED%95%B4%20%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%9D%BC%EC%9B%80%ED%94%BC%ED%8A%B8%EB%8B%88%EC%8A%A4" target="_blank" rel="noreferrer">블로그 검색</a>
+                <a class="table-action" href="https://www.instagram.com/treetraum_fitness/" target="_blank" rel="noreferrer">인스타</a>
               </div>
             </div>
             <div class="channel-card">
@@ -387,8 +387,8 @@ const dashboardHtml = String.raw`
             <table class="brand-radar-table">
               <thead><tr><th>네이버 블로그</th><th>ITN</th><th>트리트라움</th><th>DM</th><th>엘루나 천곡</th><th>엘루나 대동</th><th>팀터틀랫</th></tr></thead>
               <tbody>
-                <tr><td>채널</td><td>wgym7987</td><td>flatgrey</td><td>dmfitness2</td><td>wjstkdwns52</td><td>whdrua7583</td><td>tsports2017</td></tr>
-                <tr><td>콘텐츠 성격</td><td>전문성·수업 메시지 강화 필요</td><td>시설/리뷰성</td><td>이벤트·할인</td><td>운동정보·질문형</td><td>건강상식형</td><td>운영/생활형</td></tr>
+                <tr><td>채널</td><td>wgym7987</td><td>공식 블로그 미확인</td><td>dmfitness2</td><td>wjstkdwns52</td><td>whdrua7583</td><td>tsports2017</td></tr>
+                <tr><td>콘텐츠 성격</td><td>전문성·수업 메시지 강화 필요</td><td>블로그는 검색 결과 기준으로만 모니터링</td><td>이벤트·할인</td><td>운동정보·질문형</td><td>건강상식형</td><td>운영/생활형</td></tr>
                 <tr><td>선점 키워드</td><td>동해 재활PT·체형교정</td><td>대형 헬스장</td><td>저가 헬스·일일권</td><td>동해헬스장·동해PT</td><td>동해헬스·건강정보</td><td>브랜드형 PT</td></tr>
               </tbody>
             </table>
@@ -397,8 +397,8 @@ const dashboardHtml = String.raw`
             <table class="brand-radar-table">
               <thead><tr><th>인스타그램</th><th>ITN</th><th>트리트라움</th><th>DM</th><th>엘루나 천곡</th><th>엘루나 대동</th><th>팀터틀랫</th></tr></thead>
               <tbody>
-                <tr><td>계정</td><td>@itnfitness_</td><td>@rabia_fitness</td><td>@dm.fitness_official</td><td>@eluna_gym</td><td>@eluna_gym</td><td>@king_leehyunho</td></tr>
-                <tr><td>강점</td><td>전문 수업 증거화 가능</td><td>PT 스튜디오 톤</td><td>공식 이벤트 톤</td><td>지역 해시태그 반복</td><td>공용 브랜드 노출</td><td>개인 신뢰감</td></tr>
+                <tr><td>계정</td><td>@itnfitness_</td><td>@treetraum_fitness</td><td>@dm.fitness_official</td><td>@eluna_gym</td><td>@eluna_gym</td><td>@king_leehyunho</td></tr>
+                <tr><td>강점</td><td>전문 수업 증거화 가능</td><td>24시·하이엔드·대형 시설 톤</td><td>공식 이벤트 톤</td><td>지역 해시태그 반복</td><td>공용 브랜드 노출</td><td>개인 신뢰감</td></tr>
                 <tr><td>ITN 액션</td><td>평가 릴스·강사진 캐러셀</td><td>대형센터 실패 고객 흡수</td><td>체험권 리포트 CTA</td><td>세부 목적 해시태그</td><td>케이스 카드뉴스</td><td>강사별 전문 시리즈</td></tr>
               </tbody>
             </table>
@@ -453,8 +453,8 @@ const dashboardHtml = String.raw`
             </div>
             <div class="evidence-grid">
               <div class="evidence"><strong>플레이스/검색</strong><p>대형 시설, 운영시간, 장비 스펙, 주차 편의가 검색 고객의 첫 비교 기준이 됩니다.</p></div>
-              <div class="evidence"><strong>블로그</strong><p>제공된 블로그는 피트니스 전문 콘텐츠보다 일반 리뷰 성격이 강해 깊은 전문성 노출은 약합니다.</p></div>
-              <div class="evidence"><strong>인스타그램</strong><p>라비아 피트니스 채널은 1:1 PT 전문 스튜디오 톤으로, 대형 시설과 PT 전문 이미지를 동시에 보완합니다.</p></div>
+              <div class="evidence"><strong>블로그</strong><p>공식 블로그는 확인되지 않았습니다. 블로그 분석은 네이버 블로그 검색 결과에서 트리트라움 관련 노출 글만 분리해 봐야 합니다.</p></div>
+              <div class="evidence"><strong>인스타그램</strong><p>공식 계정은 @treetraum_fitness 기준입니다. 24시, 하이엔드, 대형 시설, AI 운동 솔루션 이미지를 반복합니다.</p></div>
             </div>
             <div class="strategy-box"><strong>ITN 대응 전략</strong><p>트리트라움과 시설 규모로 싸우지 말고 “대형센터에서 방치된 고객”, “기구는 많은데 내 몸에 맞는 운동을 못 찾은 고객”을 겨냥합니다. 상담 문구는 ‘기구 추천’이 아니라 ‘체형평가 후 운동 처방’으로 잡아야 합니다.</p></div>
             <ul class="compact-list">

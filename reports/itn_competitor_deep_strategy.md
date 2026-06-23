@@ -135,9 +135,10 @@ ITN이 피해야 할 고객:
 
 블로그/인스타그램 신호:
 
-- 연결 블로그 `flatgrey`의 RSS는 피트니스 전문 블로그라기보다 여행/카페/리뷰성 글이 많다.
-- 인스타그램 타이틀은 `라비아 피트니스 <1:1PT 전문 스튜디오>`로 노출된다.
-- 즉, 홈페이지는 트리트라움 브랜드가 강하지만 블로그/인스타그램 연결성은 약하거나 다른 브랜드/개인 채널처럼 보인다.
+- 기존에 연결했던 외부 블로그는 트리트라움 공식 블로그로 보기 어렵다.
+- 현재 공식 네이버 블로그는 확정하지 않고, 네이버 블로그 검색 결과에서 트리트라움 관련 글만 분리해 모니터링한다.
+- 인스타그램은 `@treetraum_fitness` 기준으로 보며, 24시·하이엔드·대형 시설·AI 운동 솔루션 메시지를 반복한다.
+- 즉, 홈페이지와 인스타그램은 트리트라움 브랜드 신호가 강하지만, 블로그는 공식 채널보다 검색 노출 모니터링 대상으로 봐야 한다.
 
 ### 3.2 경쟁력 평가
 
@@ -724,8 +725,8 @@ ITN이 피해야 할 고객:
 - ITN 블로그 RSS: https://rss.blog.naver.com/wgym7987.xml
 - ITN 인스타그램: https://www.instagram.com/itnfitness_/
 - 트리트라움 홈페이지: https://www.treetaum.com/
-- 트리트라움 블로그 RSS: https://rss.blog.naver.com/flatgrey.xml
-- 트리트라움 인스타그램: https://www.instagram.com/rabia_fitness/
+- 트리트라움 블로그 검색: https://search.naver.com/search.naver?where=blog&query=%EA%B0%95%EC%9B%90%20%EB%8F%99%ED%95%B4%20%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%9D%BC%EC%9B%80%ED%94%BC%ED%8A%B8%EB%8B%88%EC%8A%A4
+- 트리트라움 인스타그램: https://www.instagram.com/treetraum_fitness/
 - 디엠휘트니스 대동점 공개 업체 정보: https://place.udanax.org/p/1084313/%EB%94%94%EC%97%A0%ED%9C%98%ED%8A%B8%EB%8B%88%EC%8A%A4%20%EB%8C%80%EB%8F%99%EC%A0%90
 - 디엠휘트니스 가격/리뷰 공개 검색 결과: https://kakaoq.tistory.com/entry/%EA%B0%95%EC%9B%90%EB%8F%84-%EB%8F%99%ED%95%B4%EC%8B%9C-%ED%97%AC%EC%8A%A4%EC%9E%A5-BEST4-%EA%B0%80%EA%B2%A9%EB%B9%84%EA%B5%90-%ED%9B%84%EA%B8%B0%EC%A2%8B%EC%9D%80%EA%B3%B3-%EC%9D%BC%EC%9D%BC%EA%B6%8C-PT-%EC%A0%80%EB%A0%B4%ED%95%9C%EA%B3%B3-%EC%B4%9D%EC%A0%95%EB%A6%AC
 - 디엠휘트니스 블로그 RSS: https://rss.blog.naver.com/dmfitness2.xml
