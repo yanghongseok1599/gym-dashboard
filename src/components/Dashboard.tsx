@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import readXlsxFile from 'read-excel-file/browser';
 import { getSupabaseClient } from '@/lib/supabase';
 
 const dashboardHtml = String.raw`
@@ -39,7 +40,7 @@ const dashboardHtml = String.raw`
           <button class="btn" type="button" id="logout-button">로그아웃</button>
           <button class="btn" type="button" id="sample-sales-download" data-admin-only>샘플 CSV</button>
           <button class="btn primary" type="button" id="sales-upload-trigger" data-admin-only>매출자료 업로드</button>
-          <input type="file" id="sales-upload-input" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values" hidden>
+          <input type="file" id="sales-upload-input" accept=".csv,.tsv,.txt,.xlsx,text/csv,text/tab-separated-values,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
           <span class="save-status header-status" id="sales-upload-status"></span>
         </div>
       </header>
@@ -965,8 +966,9 @@ const salesSampleRows = [
   ['PT 환불', '환불', '이회원', '010-2222-2222', '카드취소', '500000', '200000', 'N', '2026-06-03', '김실장', 'N'],
 ];
 
-const allowedSalesFilePattern = /\.(csv|tsv|txt)$/i;
-const maxSalesFileSize = 5 * 1024 * 1024;
+const allowedSalesFilePattern = /\.(csv|tsv|txt|xlsx)$/i;
+const excelSalesFilePattern = /\.xlsx$/i;
+const maxSalesFileSize = 10 * 1024 * 1024;
 
 const escapeText = (value: string) =>
   String(value || '')
@@ -980,6 +982,12 @@ const formatCurrency = (value: number) => `₩${Math.round(value).toLocaleString
 const formatPercent = (value: number) => `${value.toFixed(1)}%`;
 
 const normalizeHeader = (value: string) => value.replace(/\s+/g, '').replace(/[()]/g, '').toLowerCase();
+
+const normalizeSalesCell = (value: unknown) => {
+  if (value instanceof Date) return value.toISOString().slice(0, 10);
+  if (value === null || value === undefined) return '';
+  return String(value).trim();
+};
 
 const parseAmount = (value: string | undefined) => {
   const raw = String(value || '').trim();
@@ -1056,10 +1064,13 @@ const monthLabel = (dateValue: string) => {
   return '날짜 없음';
 };
 
-const analyzeSalesText = (fileName: string, text: string): SalesSummary => {
-  const rows = parseDelimitedRows(text);
+const analyzeSalesRows = (fileName: string, rawRows: unknown[][]): SalesSummary => {
+  const rows = rawRows
+    .map((row) => row.map((cell) => normalizeSalesCell(cell)))
+    .filter((row) => row.some((cell) => cell));
+
   if (rows.length < 2) {
-    throw new Error('헤더와 매출 행이 있는 CSV/TSV 파일을 업로드하세요.');
+    throw new Error('헤더와 매출 행이 있는 CSV/TSV/XLSX 파일을 업로드하세요.');
   }
 
   const headers = rows[0].map(normalizeHeader);
@@ -1167,6 +1178,19 @@ const analyzeSalesText = (fileName: string, text: string): SalesSummary => {
     managerStats,
     monthlyStats,
   };
+};
+
+const analyzeSalesText = (fileName: string, text: string): SalesSummary => analyzeSalesRows(fileName, parseDelimitedRows(text));
+
+const analyzeSalesFile = async (file: File): Promise<SalesSummary> => {
+  if (excelSalesFilePattern.test(file.name)) {
+    const sheets = await readXlsxFile(file);
+    const rows = sheets[0]?.data || [];
+    return analyzeSalesRows(file.name, rows);
+  }
+
+  const text = await file.text();
+  return analyzeSalesText(file.name, text);
 };
 
 const downloadSalesSample = () => {
@@ -1527,13 +1551,13 @@ export default function Dashboard() {
       const file = salesUploadInput.files?.[0];
       if (!file) return;
       if (!allowedSalesFilePattern.test(file.name)) {
-        if (salesUploadStatus) salesUploadStatus.textContent = 'CSV, TSV, TXT 파일만 업로드할 수 있습니다.';
+        if (salesUploadStatus) salesUploadStatus.textContent = 'CSV, TSV, TXT, XLSX 파일만 업로드할 수 있습니다.';
         salesUploadInput.value = '';
         return;
       }
 
       if (file.size > maxSalesFileSize) {
-        if (salesUploadStatus) salesUploadStatus.textContent = '매출자료 파일은 5MB 이하로 업로드하세요.';
+        if (salesUploadStatus) salesUploadStatus.textContent = '매출자료 파일은 10MB 이하로 업로드하세요.';
         salesUploadInput.value = '';
         return;
       }
@@ -1541,8 +1565,7 @@ export default function Dashboard() {
       if (salesUploadStatus) salesUploadStatus.textContent = `${file.name} 분석 중입니다.`;
 
       try {
-        const text = await file.text();
-        const summary = analyzeSalesText(file.name, text);
+        const summary = await analyzeSalesFile(file);
         renderSalesSummary(summary);
         if (salesUploadStatus) salesUploadStatus.textContent = `${file.name} 화면 반영 완료 · Supabase 저장 중`;
         await saveSalesSummary(summary);
