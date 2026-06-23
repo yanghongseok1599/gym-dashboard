@@ -655,20 +655,20 @@ const dashboardHtml = String.raw`
       <div class="view" data-view-panel="report">
         <section class="grid main-layout">
           <div class="panel">
-            <div class="section-title"><h2>AI 전략 리포트</h2><span class="pill">요약</span></div>
+            <div class="section-title"><h2>AI 전략 리포트</h2><span class="pill">근거 기반</span></div>
             <div class="task-list">
               <div class="task"><strong>핵심 문제</strong><p>ITN은 전문성 증거가 강하지만, 경쟁사가 시설·가격·지역 키워드에서 각자 강점을 갖고 있어 채널별 메시지 반복이 필요합니다.</p></div>
-              <div class="task"><strong>핵심 전략</strong><p>일반 헬스장 키워드보다 동해 재활PT, 동해 체형교정, 산전산후, 완경기, 키즈PT 세부 키워드를 선점합니다.</p></div>
-              <div class="task"><strong>이번 달 목표</strong><p>블로그 30개, 릴스 24개, 리뷰 20건, 체형평가 예약 30건을 만들고 재등록률을 45%까지 회복합니다.</p></div>
+              <div class="task"><strong>핵심 전략</strong><p>일반 헬스장 키워드보다 동해 재활PT, 동해 체형교정, 산전산후, 완경기, 키즈PT처럼 구매 의도가 높은 세부 키워드와 재등록 대상 관리를 우선합니다.</p></div>
+              <div class="task"><strong>이번 달 목표</strong><p>만료 30일 회원 연락률 90%, 체형평가 예약 30건, 재등록률 45%, 재등록 매출 15% 상승을 한 달 단위로 검증합니다.</p></div>
             </div>
           </div>
           <div class="grid">
             <div class="panel">
-              <div class="section-title"><h2>문서 링크</h2><span class="pill">로컬</span></div>
+              <div class="section-title"><h2>근거 자료</h2><span class="pill">연구 기반</span></div>
               <div class="task-list">
-                <div class="task"><strong>심층 경쟁사 분석</strong><p>reports/itn_competitor_deep_strategy.md</p></div>
-                <div class="task"><strong>채널 분석</strong><p>reports/itn_competitor_channel_analysis.md</p></div>
-                <div class="task"><strong>저장 데이터</strong><p>data/itn_competitors.json</p></div>
+                <div class="task"><strong>헬스장 방문 행동</strong><p>6만 명 이상 대상 메가스터디에서 계획·리마인드·소액 보상이 주간 방문을 유의하게 늘렸습니다.</p></div>
+                <div class="task"><strong>목표 설정</strong><p>구체적이고 어려운 목표, 결과 피드백, 담당자 책임이 성과를 높인다는 목표설정 이론을 기준으로 업무를 쪼갭니다.</p></div>
+                <div class="task"><strong>재등록 관리</strong><p>서비스업은 이탈을 정의하고 측정해야 품질 개선이 가능하므로 만료·휴면·미수·상담 실패를 주간 지표로 관리합니다.</p></div>
               </div>
             </div>
             <div class="panel">
@@ -683,6 +683,147 @@ const dashboardHtml = String.raw`
               </table>
             </div>
           </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title"><h2>실행 전략 보드</h2><span class="pill">직원 실행용</span></div>
+          <div class="evidence-strategy-grid">
+            <div class="evidence-card">
+              <div class="evidence-level">근거 강도 높음</div>
+              <h3>만료 30일 재등록 스프린트</h3>
+              <p>만료 예정 회원을 출석률/구매금액/통증 개선 경험으로 나누고, 고가능성 회원부터 운동 리포트와 다음 목표를 제안합니다.</p>
+              <ul>
+                <li>담당: 관계형 직원</li>
+                <li>측정: 대상수, 연락수, 상담예약, 재등록수, 재등록매출</li>
+                <li>판정: 연락률 90% 이상, 재등록률 45% 이상</li>
+              </ul>
+            </div>
+            <div class="evidence-card">
+              <div class="evidence-level">헬스장 RCT 근거</div>
+              <h3>결석 복귀 리마인드</h3>
+              <p>최근 7~14일 미방문 회원에게 예약 가능한 시간, 짧은 복귀 운동, 소액 보상 또는 체형 체크를 붙여 방문 재개를 유도합니다.</p>
+              <ul>
+                <li>담당: 상담/운영 직원</li>
+                <li>측정: 미방문 대상수, 메시지 발송, 복귀 예약, 실제 방문</li>
+                <li>판정: 방문 재개율 20% 이상</li>
+              </ul>
+            </div>
+            <div class="evidence-card">
+              <div class="evidence-level">목표설정 이론</div>
+              <h3>직원별 숫자 목표</h3>
+              <p>“열심히” 대신 직원별로 이번 주 상담예약, 후기요청, 콘텐츠 발행, 재등록 매출을 숫자로 정하고 매일 피드백합니다.</p>
+              <ul>
+                <li>담당: 관리자</li>
+                <li>측정: 직원별 목표 대비 실행률, 상담 전환율, 매출 기여</li>
+                <li>판정: 실행률 80% 미만이면 업무량/스크립트 재설계</li>
+              </ul>
+            </div>
+            <div class="evidence-card">
+              <div class="evidence-level">실행의도 근거</div>
+              <h3>If-Then 상담 스크립트</h3>
+              <p>“대형센터에서 방치됐다면 체형평가”, “가격만 묻는다면 결과 리포트 체험권”처럼 상황별 다음 행동을 고정합니다.</p>
+              <ul>
+                <li>담당: 상담 담당자</li>
+                <li>측정: 상담유형, 제안횟수, 체험권 결제, 본등록 전환</li>
+                <li>판정: 유형별 전환율이 낮으면 질문 순서 수정</li>
+              </ul>
+            </div>
+          </div>
+          <div class="source-list">
+            <a href="https://www.hbs.edu/ris/Publication%20Files/Impact%20of%20Applied%20B.S._2725821f-f483-4930-9393-33c613b1f14a.pdf" target="_blank" rel="noreferrer">Milkman et al. 헬스장 행동 메가스터디</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/12237980/" target="_blank" rel="noreferrer">Locke & Latham 목표설정 연구</a>
+            <a href="https://cancercontrol.cancer.gov/sites/default/files/2020-06/goal_intent_attain.pdf" target="_blank" rel="noreferrer">Gollwitzer & Sheeran 실행의도 메타분석</a>
+            <a href="https://hbr.org/1990/09/zero-defections-quality-comes-to-services" target="_blank" rel="noreferrer">Reichheld & Sasser 서비스 이탈 관리</a>
+          </div>
+        </section>
+
+        <section class="grid two-col">
+          <div class="panel" data-admin-only>
+            <div class="section-title"><h2>성과 측정 입력</h2><span class="pill">관리자 체크</span></div>
+            <form id="strategy-form">
+              <input type="hidden" id="strategy-id">
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="strategy-week">주차 시작일</label>
+                  <input id="strategy-week" type="date">
+                </div>
+                <div class="form-field">
+                  <label for="strategy-name">실행 전략</label>
+                  <select id="strategy-name">
+                    <option>만료 30일 재등록 스프린트</option>
+                    <option>결석 복귀 리마인드</option>
+                    <option>직원별 숫자 목표</option>
+                    <option>If-Then 상담 스크립트</option>
+                    <option>세부 키워드 콘텐츠 발행</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="strategy-owner">담당자</label>
+                  <input id="strategy-owner" placeholder="예: 김실장">
+                </div>
+                <div class="form-field">
+                  <label for="strategy-target-count">대상수</label>
+                  <input id="strategy-target-count" type="number" min="0" step="1" placeholder="예: 43">
+                </div>
+                <div class="form-field">
+                  <label for="strategy-action-count">실행수</label>
+                  <input id="strategy-action-count" type="number" min="0" step="1" placeholder="연락/발송/제안 수">
+                </div>
+                <div class="form-field">
+                  <label for="strategy-booking-count">상담/방문 예약</label>
+                  <input id="strategy-booking-count" type="number" min="0" step="1" placeholder="예: 18">
+                </div>
+                <div class="form-field">
+                  <label for="strategy-sales-count">결제/재등록 건수</label>
+                  <input id="strategy-sales-count" type="number" min="0" step="1" placeholder="예: 8">
+                </div>
+                <div class="form-field">
+                  <label for="strategy-renewal-count">재등록수</label>
+                  <input id="strategy-renewal-count" type="number" min="0" step="1" placeholder="예: 6">
+                </div>
+                <div class="form-field">
+                  <label for="strategy-baseline-revenue">비교 기준 매출</label>
+                  <input id="strategy-baseline-revenue" type="number" min="0" step="10000" placeholder="전주/전월 같은 기간 매출">
+                </div>
+                <div class="form-field">
+                  <label for="strategy-result-revenue">실행 후 매출</label>
+                  <input id="strategy-result-revenue" type="number" min="0" step="10000" placeholder="이번 주 해당 전략 매출">
+                </div>
+                <div class="form-field">
+                  <label for="strategy-cost">비용</label>
+                  <input id="strategy-cost" type="number" min="0" step="1000" placeholder="광고비/보상/제작비">
+                </div>
+                <div class="form-field full">
+                  <label for="strategy-note">실행 메모</label>
+                  <textarea id="strategy-note" placeholder="스크립트, 고객 반응, 실패 원인, 다음 주 수정사항"></textarea>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button class="btn primary" type="button" id="strategy-save">성과 기록 저장</button>
+                <button class="btn" type="button" id="strategy-reset">새 기록</button>
+                <span class="save-status" id="strategy-save-status"></span>
+              </div>
+            </form>
+          </div>
+          <div class="panel">
+            <div class="section-title"><h2>성과 판정</h2><span class="pill">자동 계산</span></div>
+            <div class="tracking-summary">
+              <div><span>누적 매출증감</span><strong id="strategy-total-lift">₩0</strong></div>
+              <div><span>평균 전환율</span><strong id="strategy-average-conversion">0.0%</strong></div>
+              <div><span>평균 실행률</span><strong id="strategy-average-action">0.0%</strong></div>
+            </div>
+            <div class="tracking-result" id="strategy-current-result">
+              이번 주 성과를 입력하면 실행률, 전환율, 매출증감, ROI를 자동 계산합니다.
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title"><h2>성과 기록</h2><span class="pill">주간 비교</span></div>
+          <table>
+            <thead><tr><th>주차</th><th>전략</th><th>담당</th><th>실행률</th><th>전환율</th><th>매출증감</th><th>ROI</th><th>관리</th></tr></thead>
+            <tbody id="strategy-table-body"></tbody>
+          </table>
         </section>
       </div>
     </main>
@@ -740,6 +881,38 @@ type SalesSummary = {
   }>;
 };
 
+type StrategyExperiment = {
+  id: string;
+  weekStart: string;
+  strategyName: string;
+  ownerName: string;
+  targetCount: number;
+  actionCount: number;
+  bookingCount: number;
+  salesCount: number;
+  renewalCount: number;
+  baselineRevenue: number;
+  resultRevenue: number;
+  cost: number;
+  note: string;
+};
+
+type DbStrategyExperiment = {
+  id: string;
+  week_start: string;
+  strategy_name: string;
+  owner_name: string | null;
+  target_count: number | null;
+  action_count: number | null;
+  booking_count: number | null;
+  sales_count: number | null;
+  renewal_count: number | null;
+  baseline_revenue: number | null;
+  result_revenue: number | null;
+  cost: number | null;
+  note: string | null;
+};
+
 const pages = {
   overview: {
     title: '대표 대시보드',
@@ -769,6 +942,7 @@ const pages = {
 
 const staffStorageKey = 'gymDashboardStaffV2';
 const legacyStaffStorageKey = 'gymDashboardStaff';
+const strategyExperimentStorageKey = 'gymDashboardStrategyExperimentsV1';
 const storeId = process.env.NEXT_PUBLIC_SUPABASE_STORE_ID || '00000000-0000-4000-8000-000000000001';
 
 const salesSampleHeaders = [
@@ -1151,6 +1325,112 @@ const deleteStaffFromSupabase = async (id: string) => {
   if (error) throw error;
 };
 
+const parseTrackingNumber = (value: string | undefined) => {
+  const numeric = Number(String(value || '').replace(/[,\s원₩]/g, ''));
+  return Number.isFinite(numeric) ? numeric : 0;
+};
+
+const calculateRate = (numerator: number, denominator: number) => (denominator > 0 ? (numerator / denominator) * 100 : 0);
+
+const formatSignedCurrency = (value: number) => {
+  const sign = value > 0 ? '+' : value < 0 ? '-' : '';
+  return `${sign}${formatCurrency(Math.abs(value))}`;
+};
+
+const getCurrentWeekStart = () => {
+  const date = new Date();
+  const day = date.getDay() || 7;
+  date.setDate(date.getDate() - day + 1);
+  return date.toISOString().slice(0, 10);
+};
+
+const loadStrategyExperiments = (): StrategyExperiment[] => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(strategyExperimentStorageKey) || '[]');
+    return Array.isArray(saved) ? saved : [];
+  } catch {
+    return [];
+  }
+};
+
+const saveStrategyExperiments = (experiments: StrategyExperiment[]) => {
+  try {
+    localStorage.setItem(strategyExperimentStorageKey, JSON.stringify(experiments));
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+const mapDbStrategyExperiment = (experiment: DbStrategyExperiment): StrategyExperiment => ({
+  id: experiment.id,
+  weekStart: experiment.week_start,
+  strategyName: experiment.strategy_name,
+  ownerName: experiment.owner_name || '',
+  targetCount: Number(experiment.target_count || 0),
+  actionCount: Number(experiment.action_count || 0),
+  bookingCount: Number(experiment.booking_count || 0),
+  salesCount: Number(experiment.sales_count || 0),
+  renewalCount: Number(experiment.renewal_count || 0),
+  baselineRevenue: Number(experiment.baseline_revenue || 0),
+  resultRevenue: Number(experiment.result_revenue || 0),
+  cost: Number(experiment.cost || 0),
+  note: experiment.note || '',
+});
+
+const loadStrategyExperimentsFromSupabase = async () => {
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from('strategy_experiments')
+    .select('id,week_start,strategy_name,owner_name,target_count,action_count,booking_count,sales_count,renewal_count,baseline_revenue,result_revenue,cost,note')
+    .eq('store_id', storeId)
+    .order('week_start', { ascending: false })
+    .order('created_at', { ascending: false })
+    .limit(50);
+
+  if (error) throw error;
+  return (data || []).map((item) => mapDbStrategyExperiment(item as DbStrategyExperiment));
+};
+
+const saveStrategyExperimentToSupabase = async (experiment: StrategyExperiment) => {
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from('strategy_experiments')
+    .upsert({
+      id: experiment.id,
+      store_id: storeId,
+      week_start: experiment.weekStart,
+      strategy_name: experiment.strategyName,
+      owner_name: experiment.ownerName,
+      target_count: experiment.targetCount,
+      action_count: experiment.actionCount,
+      booking_count: experiment.bookingCount,
+      sales_count: experiment.salesCount,
+      renewal_count: experiment.renewalCount,
+      baseline_revenue: experiment.baselineRevenue,
+      result_revenue: experiment.resultRevenue,
+      cost: experiment.cost,
+      note: experiment.note,
+      updated_at: new Date().toISOString(),
+    })
+    .select('id,week_start,strategy_name,owner_name,target_count,action_count,booking_count,sales_count,renewal_count,baseline_revenue,result_revenue,cost,note')
+    .single();
+
+  if (error) throw error;
+  return mapDbStrategyExperiment(data as DbStrategyExperiment);
+};
+
+const deleteStrategyExperimentFromSupabase = async (id: string) => {
+  const supabase = getSupabaseClient();
+  const { error } = await supabase
+    .from('strategy_experiments')
+    .delete()
+    .eq('id', id)
+    .eq('store_id', storeId);
+
+  if (error) throw error;
+};
+
 export default function Dashboard() {
   useEffect(() => {
     const navButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('nav button[data-view]'));
@@ -1169,6 +1449,28 @@ export default function Dashboard() {
     const competitorIndustryInput = document.querySelector<HTMLInputElement>('#competitor-industry-input');
     const competitorNameInput = document.querySelector<HTMLInputElement>('#competitor-name-input');
     const competitorSearchButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-competitor-search]'));
+    const strategyForm = document.querySelector<HTMLFormElement>('#strategy-form');
+    const strategyIdInput = document.querySelector<HTMLInputElement>('#strategy-id');
+    const strategyWeekInput = document.querySelector<HTMLInputElement>('#strategy-week');
+    const strategyNameInput = document.querySelector<HTMLSelectElement>('#strategy-name');
+    const strategyOwnerInput = document.querySelector<HTMLInputElement>('#strategy-owner');
+    const strategyTargetCountInput = document.querySelector<HTMLInputElement>('#strategy-target-count');
+    const strategyActionCountInput = document.querySelector<HTMLInputElement>('#strategy-action-count');
+    const strategyBookingCountInput = document.querySelector<HTMLInputElement>('#strategy-booking-count');
+    const strategySalesCountInput = document.querySelector<HTMLInputElement>('#strategy-sales-count');
+    const strategyRenewalCountInput = document.querySelector<HTMLInputElement>('#strategy-renewal-count');
+    const strategyBaselineRevenueInput = document.querySelector<HTMLInputElement>('#strategy-baseline-revenue');
+    const strategyResultRevenueInput = document.querySelector<HTMLInputElement>('#strategy-result-revenue');
+    const strategyCostInput = document.querySelector<HTMLInputElement>('#strategy-cost');
+    const strategyNoteInput = document.querySelector<HTMLTextAreaElement>('#strategy-note');
+    const strategySaveButton = document.querySelector<HTMLButtonElement>('#strategy-save');
+    const strategyResetButton = document.querySelector<HTMLButtonElement>('#strategy-reset');
+    const strategySaveStatus = document.querySelector<HTMLElement>('#strategy-save-status');
+    const strategyTableBody = document.querySelector<HTMLTableSectionElement>('#strategy-table-body');
+    const strategyTotalLift = document.querySelector<HTMLElement>('#strategy-total-lift');
+    const strategyAverageConversion = document.querySelector<HTMLElement>('#strategy-average-conversion');
+    const strategyAverageAction = document.querySelector<HTMLElement>('#strategy-average-action');
+    const strategyCurrentResult = document.querySelector<HTMLElement>('#strategy-current-result');
 
     const supabase = getSupabaseClient();
     const eventController = new AbortController();
@@ -1308,6 +1610,184 @@ export default function Dashboard() {
     const staffMainType = document.querySelector<HTMLElement>('#staff-main-type');
     const staffMainKpi = document.querySelector<HTMLElement>('#staff-main-kpi');
     const staffMainNote = document.querySelector<HTMLElement>('#staff-main-note');
+    let strategyExperiments = loadStrategyExperiments();
+
+    const renderStrategyExperiments = () => {
+      if (!strategyTableBody || !strategyTotalLift || !strategyAverageConversion || !strategyAverageAction || !strategyCurrentResult) return;
+
+      const totalLift = strategyExperiments.reduce((sum, item) => sum + (item.resultRevenue - item.baselineRevenue), 0);
+      const totalAction = strategyExperiments.reduce((sum, item) => sum + item.actionCount, 0);
+      const totalTarget = strategyExperiments.reduce((sum, item) => sum + item.targetCount, 0);
+      const totalSales = strategyExperiments.reduce((sum, item) => sum + item.salesCount, 0);
+
+      strategyTotalLift.textContent = formatSignedCurrency(totalLift);
+      strategyAverageAction.textContent = formatPercent(calculateRate(totalAction, totalTarget));
+      strategyAverageConversion.textContent = formatPercent(calculateRate(totalSales, totalAction));
+
+      if (!strategyExperiments.length) {
+        strategyTableBody.innerHTML = '<tr><td colspan="8">아직 성과 기록이 없습니다. 관리자 체크 입력란에서 이번 주 실행 결과를 저장하세요.</td></tr>';
+        strategyCurrentResult.textContent = '이번 주 성과를 입력하면 실행률, 전환율, 매출증감, ROI를 자동 계산합니다.';
+        return;
+      }
+
+      const latest = strategyExperiments[0];
+      const latestLift = latest.resultRevenue - latest.baselineRevenue;
+      const latestRoi = latest.cost > 0 ? ((latestLift - latest.cost) / latest.cost) * 100 : 0;
+      strategyCurrentResult.textContent = `${latest.weekStart} ${latest.strategyName}: 실행률 ${formatPercent(calculateRate(latest.actionCount, latest.targetCount))}, 전환율 ${formatPercent(calculateRate(latest.salesCount, latest.actionCount))}, 매출증감 ${formatSignedCurrency(latestLift)}${latest.cost > 0 ? `, ROI ${formatPercent(latestRoi)}` : ''}`;
+
+      strategyTableBody.innerHTML = strategyExperiments.map((item) => {
+        const lift = item.resultRevenue - item.baselineRevenue;
+        const roi = item.cost > 0 ? ((lift - item.cost) / item.cost) * 100 : null;
+        return `
+          <tr>
+            <td>${escapeText(item.weekStart)}</td>
+            <td>${escapeText(item.strategyName)}</td>
+            <td>${escapeText(item.ownerName || '담당 미입력')}</td>
+            <td>${formatPercent(calculateRate(item.actionCount, item.targetCount))}</td>
+            <td>${formatPercent(calculateRate(item.salesCount, item.actionCount))}</td>
+            <td>${formatSignedCurrency(lift)}</td>
+            <td>${roi === null ? '-' : formatPercent(roi)}</td>
+            <td>
+              <div class="row-actions">
+                <button class="table-action" type="button" data-strategy-edit="${item.id}">수정</button>
+                <button class="table-action danger" type="button" data-strategy-delete="${item.id}">삭제</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    };
+
+    const clearStrategyForm = () => {
+      if (!strategyForm || !strategyIdInput || !strategyWeekInput || !strategySaveStatus) return;
+      strategyForm.reset();
+      strategyIdInput.value = '';
+      strategyWeekInput.value = getCurrentWeekStart();
+      strategySaveStatus.textContent = '';
+    };
+
+    const fillStrategyForm = (id: string) => {
+      if (!strategyIdInput || !strategyWeekInput || !strategyNameInput || !strategyOwnerInput || !strategyTargetCountInput || !strategyActionCountInput || !strategyBookingCountInput || !strategySalesCountInput || !strategyRenewalCountInput || !strategyBaselineRevenueInput || !strategyResultRevenueInput || !strategyCostInput || !strategyNoteInput || !strategySaveStatus) return;
+      const experiment = strategyExperiments.find((item) => item.id === id);
+      if (!experiment) return;
+      strategyIdInput.value = experiment.id;
+      strategyWeekInput.value = experiment.weekStart;
+      strategyNameInput.value = experiment.strategyName;
+      strategyOwnerInput.value = experiment.ownerName;
+      strategyTargetCountInput.value = String(experiment.targetCount || '');
+      strategyActionCountInput.value = String(experiment.actionCount || '');
+      strategyBookingCountInput.value = String(experiment.bookingCount || '');
+      strategySalesCountInput.value = String(experiment.salesCount || '');
+      strategyRenewalCountInput.value = String(experiment.renewalCount || '');
+      strategyBaselineRevenueInput.value = String(experiment.baselineRevenue || '');
+      strategyResultRevenueInput.value = String(experiment.resultRevenue || '');
+      strategyCostInput.value = String(experiment.cost || '');
+      strategyNoteInput.value = experiment.note;
+      strategySaveStatus.textContent = `${experiment.strategyName} 기록 수정 중`;
+      strategyWeekInput.focus();
+    };
+
+    const refreshStrategyExperimentsFromSupabase = async () => {
+      if (!strategySaveStatus) return;
+      try {
+        const remoteExperiments = await loadStrategyExperimentsFromSupabase();
+        strategyExperiments = remoteExperiments;
+        saveStrategyExperiments(strategyExperiments);
+        renderStrategyExperiments();
+        if (remoteExperiments.length) {
+          strategySaveStatus.textContent = 'Supabase에서 성과 기록을 불러왔습니다.';
+        }
+      } catch {
+        strategySaveStatus.textContent = '성과 기록은 브라우저 임시 저장 데이터로 표시합니다.';
+      }
+    };
+
+    const saveStrategyFromForm = async () => {
+      if (!strategyIdInput || !strategyWeekInput || !strategyNameInput || !strategyOwnerInput || !strategyTargetCountInput || !strategyActionCountInput || !strategyBookingCountInput || !strategySalesCountInput || !strategyRenewalCountInput || !strategyBaselineRevenueInput || !strategyResultRevenueInput || !strategyCostInput || !strategyNoteInput || !strategySaveButton || !strategySaveStatus) return;
+
+      const experiment: StrategyExperiment = {
+        id: strategyIdInput.value || crypto.randomUUID(),
+        weekStart: strategyWeekInput.value || getCurrentWeekStart(),
+        strategyName: strategyNameInput.value,
+        ownerName: strategyOwnerInput.value.trim(),
+        targetCount: Math.max(0, Math.round(parseTrackingNumber(strategyTargetCountInput.value))),
+        actionCount: Math.max(0, Math.round(parseTrackingNumber(strategyActionCountInput.value))),
+        bookingCount: Math.max(0, Math.round(parseTrackingNumber(strategyBookingCountInput.value))),
+        salesCount: Math.max(0, Math.round(parseTrackingNumber(strategySalesCountInput.value))),
+        renewalCount: Math.max(0, Math.round(parseTrackingNumber(strategyRenewalCountInput.value))),
+        baselineRevenue: Math.max(0, parseTrackingNumber(strategyBaselineRevenueInput.value)),
+        resultRevenue: Math.max(0, parseTrackingNumber(strategyResultRevenueInput.value)),
+        cost: Math.max(0, parseTrackingNumber(strategyCostInput.value)),
+        note: strategyNoteInput.value.trim(),
+      };
+
+      strategySaveButton.disabled = true;
+      strategySaveStatus.textContent = `${experiment.strategyName} 성과를 Supabase에 저장 중입니다.`;
+
+      try {
+        const savedExperiment = await saveStrategyExperimentToSupabase(experiment);
+        strategyExperiments = [
+          savedExperiment,
+          ...strategyExperiments.filter((item) => item.id !== savedExperiment.id),
+        ].sort((left, right) => right.weekStart.localeCompare(left.weekStart));
+        saveStrategyExperiments(strategyExperiments);
+        renderStrategyExperiments();
+        strategyIdInput.value = savedExperiment.id;
+        strategySaveStatus.textContent = '성과 기록이 Supabase에 저장되었습니다.';
+      } catch {
+        strategyExperiments = [
+          experiment,
+          ...strategyExperiments.filter((item) => item.id !== experiment.id),
+        ].sort((left, right) => right.weekStart.localeCompare(left.weekStart));
+        saveStrategyExperiments(strategyExperiments);
+        renderStrategyExperiments();
+        strategyIdInput.value = experiment.id;
+        strategySaveStatus.textContent = 'Supabase 저장은 실패했지만 화면과 브라우저에는 반영했습니다.';
+      } finally {
+        strategySaveButton.disabled = false;
+      }
+    };
+
+    const deleteStrategyExperiment = async (id: string) => {
+      if (!strategySaveStatus) return;
+      const experiment = strategyExperiments.find((item) => item.id === id);
+      if (!experiment) return;
+      const shouldDelete = window.confirm(`${experiment.weekStart} ${experiment.strategyName} 성과 기록을 삭제할까요?`);
+      if (!shouldDelete) return;
+
+      try {
+        await deleteStrategyExperimentFromSupabase(id);
+      } catch {
+        strategySaveStatus.textContent = 'Supabase 삭제는 실패했지만 브라우저 기록에서는 제거합니다.';
+      }
+
+      strategyExperiments = strategyExperiments.filter((item) => item.id !== id);
+      saveStrategyExperiments(strategyExperiments);
+      renderStrategyExperiments();
+      if (strategyIdInput?.value === id) clearStrategyForm();
+    };
+
+    if (strategyWeekInput) strategyWeekInput.value = getCurrentWeekStart();
+    renderStrategyExperiments();
+    refreshStrategyExperimentsFromSupabase();
+
+    strategyForm?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      saveStrategyFromForm();
+    }, eventOptions);
+    strategySaveButton?.addEventListener('click', saveStrategyFromForm, eventOptions);
+    strategyResetButton?.addEventListener('click', clearStrategyForm, eventOptions);
+    strategyTableBody?.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const editButton = target.closest<HTMLElement>('[data-strategy-edit]');
+      if (editButton?.dataset.strategyEdit) {
+        fillStrategyForm(editButton.dataset.strategyEdit);
+        return;
+      }
+
+      const deleteButton = target.closest<HTMLElement>('[data-strategy-delete]');
+      if (deleteButton?.dataset.strategyDelete) deleteStrategyExperiment(deleteButton.dataset.strategyDelete);
+    }, eventOptions);
 
     if (!staffForm || !staffIdInput || !staffNameInput || !staffRoleInput || !staffTypeInput || !staffScheduleInput || !staffStrengthInput || !staffKpiInput || !staffNoteInput || !staffTableBody || !staffWorkBody || !staffSaveButton || !staffResetButton || !staffSaveStatus) {
       return () => eventController.abort();

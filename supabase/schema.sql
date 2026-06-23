@@ -89,9 +89,32 @@ create table if not exists public.sales_uploads (
   summary_json jsonb not null default '{}'::jsonb
 );
 
+create table if not exists public.strategy_experiments (
+  id uuid primary key default gen_random_uuid(),
+  store_id uuid not null references public.stores(id) on delete cascade,
+  week_start date not null,
+  strategy_name text not null,
+  owner_name text,
+  target_count integer not null default 0 check (target_count >= 0),
+  action_count integer not null default 0 check (action_count >= 0),
+  booking_count integer not null default 0 check (booking_count >= 0),
+  sales_count integer not null default 0 check (sales_count >= 0),
+  renewal_count integer not null default 0 check (renewal_count >= 0),
+  baseline_revenue numeric not null default 0 check (baseline_revenue >= 0),
+  result_revenue numeric not null default 0 check (result_revenue >= 0),
+  cost numeric not null default 0 check (cost >= 0),
+  note text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists strategy_experiments_store_week_idx
+on public.strategy_experiments(store_id, week_start desc);
+
 alter table public.stores enable row level security;
 alter table public.staff_members enable row level security;
 alter table public.employee_profiles enable row level security;
 alter table public.competitor_reports enable row level security;
 alter table public.weekly_tasks enable row level security;
 alter table public.sales_uploads enable row level security;
+alter table public.strategy_experiments enable row level security;
