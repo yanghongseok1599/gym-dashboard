@@ -663,83 +663,125 @@ const dashboardHtml = String.raw`
       </div>
 
       <div class="view" data-view-panel="report">
-        <section class="grid main-layout">
-          <div class="panel">
-            <div class="section-title"><h2>AI 전략 리포트</h2><span class="pill" data-competitor-analysis-date>경쟁분석 2026.06.24</span></div>
-            <div class="task-list">
-              <div class="task"><strong>핵심 문제</strong><p>방학 시즌에 경쟁사는 24시·대형시설·저가권·상시 이벤트로 학생 유입을 가져갑니다. ITN이 같은 가격 경쟁으로 들어가면 전문 PT 포지션과 객단가가 동시에 약해집니다.</p></div>
-              <div class="task"><strong>핵심 전략</strong><p>방학 2개월 상품은 “싼 헬스장”이 아니라 “8주 안에 자세·체형·체력 변화를 확인하는 학생 관리 프로그램”으로 설계합니다. 부모가 결제할 이유를 체형분석, 루틴표, 주간 체크, 전후 비교로 만듭니다.</p></div>
-              <div class="task"><strong>이번 달 목표</strong><p>2주 안에 학생 체형분석 예약 30건, 결제 전환 15건, PT 스타터 이상 8건, 환불률 3% 이하, 8주 후 재등록률 35% 이상을 추적합니다.</p></div>
+        <section class="panel strategy-brief-panel">
+          <div class="section-title">
+            <h2>ITN 방학 경쟁 대응 리포트</h2>
+            <span class="pill" data-competitor-analysis-date>경쟁분석 2026.06.24</span>
+          </div>
+
+          <div class="brief-hero">
+            <div class="brief-date">분석 기준일: <strong>2026.06.24</strong></div>
+            <p>현재 경쟁사는 전부 “넓은 시설·24시간·저가·이벤트” 쪽으로 싸우고 있습니다. ITN은 같은 방식으로 가격 경쟁하면 손해입니다. 방학 이벤트는 학생 전용 2개월권으로 가되, 핵심 메시지는 “싸게 운동”이 아니라 <strong>8주 안에 자세·체형·체력 변화가 보이는 학생 관리 프로그램</strong>으로 잡아야 합니다.</p>
+          </div>
+
+          <div class="brief-kpi-grid">
+            <div class="brief-card danger"><span>금지</span><strong>저가 경쟁</strong><p>DM·엘루나식 가격 이벤트와 정면 경쟁하면 전문 PT 가격이 무너집니다.</p></div>
+            <div class="brief-card primary"><span>승부처</span><strong>학생 전문 관리</strong><p>학부모가 납득할 체형분석, 루틴표, 주간 체크, 전후 비교를 전면에 둡니다.</p></div>
+            <div class="brief-card success"><span>상품</span><strong>학생 8주 바른몸 챌린지</strong><p>베이직으로 진입을 만들고 PT 스타터·집중관리로 수익을 확보합니다.</p></div>
+            <div class="brief-card warn"><span>목표</span><strong>2주 15건 결제</strong><p>체형분석 예약 30건, PT 스타터 이상 8건, 환불률 3% 이하를 봅니다.</p></div>
+          </div>
+
+          <div class="brief-section">
+            <h3>경쟁사 핵심</h3>
+            <div class="brief-list">
+              <div class="brief-row"><strong>트리트라움</strong><p>24시, 하이엔드, gym80, AI 운동 솔루션, 500평대, 주차 400대 메시지가 강한 시설 첫인상 경쟁자입니다.</p></div>
+              <div class="brief-row"><strong>엘루나짐</strong><p>24시, 400평, 1일 입장, 상시 이벤트, 천곡·대동 2개 지점 노출이 강합니다.</p></div>
+              <div class="brief-row"><strong>DM휘트니스</strong><p>가격·이벤트 경쟁이 강합니다. 학생 1+1, 1일권 할인, 장기권 저가 메시지가 있습니다.</p></div>
+              <div class="brief-row"><strong>팀터틀랫</strong><p>공식 지점 페이지 기준 365일 24시, 500평, 머신 60여 종, 골프·테니스·사우나까지 묶은 복합시설 포지션입니다.</p></div>
+              <div class="brief-row"><strong>ITN</strong><p>재활학 박사과정 대표, 체육학 석사, 산전산후·완경기·척추측만·키즈 전문성이 강합니다. 이 전문성을 학생 방학 상품으로 재포장해야 합니다.</p></div>
             </div>
           </div>
-          <div class="grid">
-            <div class="panel">
-              <div class="section-title"><h2>근거 자료</h2><span class="pill">연구 기반</span></div>
-              <div class="task-list">
-                <div class="task"><strong>운동 습관 형성</strong><p>대규모 헬스장 행동 연구에서 계획 수립, 리마인드, 복귀 보상이 방문 빈도를 높였습니다. 학생 8주권도 주간 체크와 결석 복귀 메시지를 기본 장치로 둡니다.</p></div>
-                <div class="task"><strong>목표 설정</strong><p>구체적 목표, 결과 피드백, 담당자 책임이 성과를 높입니다. 학생에게는 체중보다 자세사진, 운동 수행표, 출석률 같은 눈에 보이는 목표가 먼저입니다.</p></div>
-                <div class="task"><strong>부모 결제 명분</strong><p>학생 상품은 학생이 좋아하는 가격보다 부모가 납득하는 변화 증거가 중요합니다. 체형분석 전후표와 8주 리포트를 결제 명분으로 사용합니다.</p></div>
+
+          <div class="brief-action-grid">
+            <div class="brief-section">
+              <h3>바로 실행할 이벤트</h3>
+              <div class="brief-list">
+                <div class="brief-row"><strong>이름</strong><p>ITN 학생 8주 바른몸 챌린지</p></div>
+                <div class="brief-row"><strong>대상</strong><p>중학생, 고등학생, 대학생. 거북목, 라운드숄더, 척추측만 의심, 체력 저하, 다이어트, 운동 초보, 방학 동안 부모가 결과를 보고 싶어 하는 학생.</p></div>
+                <div class="brief-row"><strong>가격 방향</strong><p>단순 가격 경쟁 금지. 베이직은 진입 장벽을 낮추고, PT 스타터에서 수익을 확보합니다. “선착순 20명”으로 할인보다 관리 정원 느낌을 줍니다.</p></div>
               </div>
             </div>
-            <div class="panel">
-              <div class="section-title"><h2>추적 지표</h2><span class="pill">학생 8주</span></div>
-              <table>
-                <tbody>
-                  <tr><td>학생 이벤트 문의</td><td><span class="status good">주 20건 목표</span></td></tr>
-                  <tr><td>체형분석 예약</td><td><span class="status good">2주 30건 목표</span></td></tr>
-                  <tr><td>학생 8주 결제</td><td><span class="status mid">15건 목표</span></td></tr>
-                  <tr><td>PT 스타터 전환</td><td><span class="status mid">8건 목표</span></td></tr>
-                  <tr><td>8주 후 재등록률</td><td><span class="status bad">35% 목표</span></td></tr>
-                </tbody>
-              </table>
+            <div class="brief-section">
+              <h3>상품 구조</h3>
+              <div class="brief-list">
+                <div class="brief-row"><strong>학생 8주 베이직</strong><p>2개월 이용 + 체형/자세 분석 2회 + 개인 운동 루틴표 + 주 1회 체크</p></div>
+                <div class="brief-row"><strong>학생 8주 PT 스타터</strong><p>베이직 + 1:1 PT 4회</p></div>
+                <div class="brief-row"><strong>학생 8주 집중관리</strong><p>베이직 + 1:1 PT 8회</p></div>
+              </div>
             </div>
           </div>
-        </section>
 
-        <section class="grid two-col">
-          <div class="panel">
-            <div class="section-title"><h2>방학 학생 8주 이벤트</h2><span class="pill">2개월 상품</span></div>
-            <div class="task-list">
-              <div class="task"><strong>상품명</strong><p>ITN 학생 8주 바른몸 챌린지. 중학생·고등학생·대학생 대상이며 거북목, 라운드숄더, 척추측만 의심, 체력저하, 운동 초보를 핵심 타깃으로 잡습니다.</p></div>
-              <div class="task"><strong>상품 구성</strong><p>베이직은 2개월 이용권, 체형·자세 분석 2회, 개인 운동 루틴표, 주 1회 체크. PT 스타터는 베이직에 1:1 PT 4회, 집중관리는 1:1 PT 8회를 붙입니다.</p></div>
-              <div class="task"><strong>가격 원칙</strong><p>DM·엘루나식 저가권과 정면 경쟁하지 않습니다. 베이직은 진입 장벽을 낮추고, PT 스타터와 집중관리에서 수익을 확보합니다.</p></div>
-              <div class="task"><strong>상담 CTA</strong><p>“방학 8주 동안 우리 아이 자세와 체력을 먼저 점검해보세요. 체형분석 후 필요한 운동만 안내합니다.”</p></div>
+          <div class="brief-channel-grid">
+            <div class="brief-section">
+              <h3>플레이스 대응</h3>
+              <div class="brief-copy">방학 8주 동안 학생 체형·자세·체력을 관리하는 ITN 학생 바른몸 챌린지. 재활학 박사과정 대표와 석사 강사진이 직접 체형 분석 후 운동 루틴을 제공합니다.</div>
+              <ul class="brief-checklist">
+                <li>방학 학생 8주 바른몸 챌린지 모집</li>
+                <li>거북목·라운드숄더 학생 체형분석 이벤트</li>
+                <li>운동 처음 하는 학생을 위한 2개월 관리 프로그램</li>
+              </ul>
+            </div>
+            <div class="brief-section">
+              <h3>블로그 대응</h3>
+              <ul class="brief-checklist">
+                <li>동해 학생 PT, 방학 8주 동안 무엇을 바꿔야 할까</li>
+                <li>중고등학생 거북목·라운드숄더 운동 전 꼭 확인할 것</li>
+                <li>동해 청소년 체형교정, 헬스장보다 평가가 먼저인 이유</li>
+                <li>방학 다이어트 실패하는 학생들의 공통점</li>
+                <li>키 성장기 학생 운동, 무작정 웨이트부터 하면 안 되는 이유</li>
+                <li>ITN 학생 바른몸 챌린지 8주 진행 방식</li>
+              </ul>
+              <div class="brief-copy">CTA: 우리 아이 자세가 걱정된다면 8주 방학 프로그램 전 체형분석부터 받아보세요.</div>
+            </div>
+            <div class="brief-section">
+              <h3>인스타 대응</h3>
+              <ul class="brief-checklist">
+                <li>학생 거북목 10초 테스트</li>
+                <li>라운드숄더 자가진단</li>
+                <li>스쿼트할 때 무릎 아픈 학생 체크</li>
+                <li>방학 8주 운동 루틴 공개</li>
+                <li>부모님이 봐야 하는 학생 체형 신호 3가지</li>
+                <li>방학 끝나기 전 바뀌어야 하는 3가지</li>
+              </ul>
+              <div class="brief-copy">스토리 질문: 자녀 자세가 걱정되나요? 방학 동안 운동 계획 있나요? 거북목/라운드숄더/체력저하 중 뭐가 제일 고민인가요?</div>
             </div>
           </div>
-          <div class="panel">
-            <div class="section-title"><h2>경쟁사 대응 요약</h2><span class="pill">플레이스·블로그·인스타</span></div>
-            <table>
-              <thead><tr><th>경쟁사</th><th>강점</th><th>ITN 대응</th></tr></thead>
-              <tbody>
-                <tr><td>트리트라움</td><td>24시·500평·gym80·AI·주차</td><td>대형센터에서 방치된 학생을 체형분석으로 흡수</td></tr>
-                <tr><td>엘루나짐</td><td>24시·400평·1일권·2지점</td><td>학생 자세교정, 키즈·청소년 PT 세부 키워드 선점</td></tr>
-                <tr><td>DM휘트니스</td><td>저가·1일권·상시 할인</td><td>가격 대신 부모가 납득하는 8주 변화 리포트 제시</td></tr>
-                <tr><td>팀터틀랫</td><td>500평·24시·복합시설</td><td>시설보다 전문 강사진 직접 관리와 안전성 강조</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
 
-        <section class="grid two-col">
-          <div class="panel">
-            <div class="section-title"><h2>채널별 실행 문구</h2><span class="pill">오늘 수정</span></div>
-            <div class="task-list">
-              <div class="task"><strong>네이버 플레이스</strong><p>방학 8주 동안 학생 체형·자세·체력을 관리하는 ITN 학생 바른몸 챌린지. 재활학 박사과정 대표와 석사 강사진이 직접 체형 분석 후 운동 루틴을 제공합니다.</p></div>
-              <div class="task"><strong>블로그 제목</strong><p>동해 학생 PT, 방학 8주 동안 무엇을 바꿔야 할까 / 중고등학생 거북목·라운드숄더 운동 전 꼭 확인할 것 / 방학 다이어트 실패하는 학생들의 공통점.</p></div>
-              <div class="task"><strong>인스타 릴스</strong><p>학생 거북목 10초 테스트, 라운드숄더 자가진단, 부모님이 봐야 하는 학생 체형 신호 3가지, 방학 8주 루틴 공개를 우선 촬영합니다.</p></div>
+          <div class="brief-action-grid">
+            <div class="brief-section">
+              <h3>직원 업무분배</h3>
+              <div class="brief-list">
+                <div class="brief-row"><strong>대표</strong><p>체형분석 기준표, 상담 신뢰 문구, 블로그 감수</p></div>
+                <div class="brief-row"><strong>PT 강사</strong><p>학생 운동 루틴 3종 제작</p></div>
+                <div class="brief-row"><strong>상담 담당</strong><p>학부모 상담 스크립트, 예약 전환 관리</p></div>
+                <div class="brief-row"><strong>콘텐츠 담당</strong><p>릴스 촬영, 전후 비교 카드뉴스, 블로그 업로드</p></div>
+                <div class="brief-row"><strong>관리자</strong><p>매출자료에서 학생8주_베이직, 학생8주_PT스타터, 학생8주_집중관리 상품명으로 성과 추적</p></div>
+              </div>
+            </div>
+            <div class="brief-section">
+              <h3>성과 체크</h3>
+              <div class="product-name-list">
+                <span>학생8주_베이직</span>
+                <span>학생8주_PT스타터</span>
+                <span>학생8주_집중관리</span>
+              </div>
+              <ul class="brief-checklist two-column">
+                <li>문의 수</li>
+                <li>체형분석 예약 수</li>
+                <li>예약 방문률</li>
+                <li>결제 전환율</li>
+                <li>PT 스타터 전환율</li>
+                <li>환불률</li>
+                <li>미수금 여부</li>
+                <li>담당자별 결제금액</li>
+                <li>8주 후 재등록 여부</li>
+              </ul>
             </div>
           </div>
-          <div class="panel">
-            <div class="section-title"><h2>직원 업무분배</h2><span class="pill">이번 주</span></div>
-            <table>
-              <thead><tr><th>담당</th><th>업무</th><th>체크 기준</th></tr></thead>
-              <tbody>
-                <tr><td>대표</td><td>체형분석 기준표, 상담 신뢰 문구, 블로그 감수</td><td>기준표 1개 완성</td></tr>
-                <tr><td>PT 강사</td><td>학생 운동 루틴 3종 제작, 전후 비교 촬영</td><td>루틴 3개·릴스 4개</td></tr>
-                <tr><td>상담 담당</td><td>학부모 상담 스크립트, 예약 전환 관리</td><td>예약률·방문률 기록</td></tr>
-                <tr><td>콘텐츠 담당</td><td>릴스, 카드뉴스, 블로그 업로드</td><td>블로그 6개·스토리 매일</td></tr>
-              </tbody>
-            </table>
+
+          <div class="brief-goal-band">
+            <strong>핵심 결론</strong>
+            <p>경쟁사는 “24시·대형·저가”로 학생을 모읍니다. ITN은 학부모가 돈을 낼 이유가 있는 학생 전문 관리 프로그램으로 가야 합니다.</p>
           </div>
         </section>
 
@@ -747,43 +789,43 @@ const dashboardHtml = String.raw`
           <div class="section-title"><h2>실행 전략 보드</h2><span class="pill">직원 실행용</span></div>
           <div class="evidence-strategy-grid">
             <div class="evidence-card">
-              <div class="evidence-level">근거 강도 높음</div>
-              <h3>만료 30일 재등록 스프린트</h3>
-              <p>만료 예정 회원을 출석률/구매금액/통증 개선 경험으로 나누고, 고가능성 회원부터 운동 리포트와 다음 목표를 제안합니다.</p>
+              <div class="evidence-level">1순위</div>
+              <h3>학생 체형분석 예약 전환</h3>
+              <p>플레이스·블로그·인스타 문의를 “무료 상담”이 아니라 체형분석 예약으로 받습니다. 첫 질문은 가격보다 학생 고민을 분류하는 데 씁니다.</p>
               <ul>
-                <li>담당: 관계형 직원</li>
-                <li>측정: 대상수, 연락수, 상담예약, 재등록수, 재등록매출</li>
-                <li>판정: 연락률 90% 이상, 재등록률 45% 이상</li>
+                <li>담당: 상담 담당</li>
+                <li>측정: 문의수, 예약수, 방문률</li>
+                <li>판정: 2주 예약 30건</li>
               </ul>
             </div>
             <div class="evidence-card">
-              <div class="evidence-level">헬스장 RCT 근거</div>
-              <h3>결석 복귀 리마인드</h3>
-              <p>최근 7~14일 미방문 회원에게 예약 가능한 시간, 짧은 복귀 운동, 소액 보상 또는 체형 체크를 붙여 방문 재개를 유도합니다.</p>
+              <div class="evidence-level">2순위</div>
+              <h3>PT 스타터 업셀링</h3>
+              <p>베이직 고객에게 전후 비교와 루틴표를 먼저 보여주고, 자세 교정이 필요한 학생만 PT 4회 스타터로 연결합니다.</p>
               <ul>
-                <li>담당: 상담/운영 직원</li>
-                <li>측정: 미방문 대상수, 메시지 발송, 복귀 예약, 실제 방문</li>
-                <li>판정: 방문 재개율 20% 이상</li>
+                <li>담당: PT 강사</li>
+                <li>측정: 베이직 결제, PT 제안, PT 전환</li>
+                <li>판정: PT 스타터 이상 8건</li>
               </ul>
             </div>
             <div class="evidence-card">
-              <div class="evidence-level">목표설정 이론</div>
-              <h3>직원별 숫자 목표</h3>
-              <p>“열심히” 대신 직원별로 이번 주 상담예약, 후기요청, 콘텐츠 발행, 재등록 매출을 숫자로 정하고 매일 피드백합니다.</p>
+              <div class="evidence-level">매일</div>
+              <h3>학생 출석 리마인드</h3>
+              <p>8주 상품은 중간 이탈이 수익과 후기 모두를 깎습니다. 결석 3일차에는 복귀 메시지, 7일차에는 담당자 전화로 관리합니다.</p>
               <ul>
-                <li>담당: 관리자</li>
-                <li>측정: 직원별 목표 대비 실행률, 상담 전환율, 매출 기여</li>
-                <li>판정: 실행률 80% 미만이면 업무량/스크립트 재설계</li>
+                <li>담당: 운영/상담</li>
+                <li>측정: 출석률, 결석 복귀율, 환불률</li>
+                <li>판정: 환불률 3% 이하</li>
               </ul>
             </div>
             <div class="evidence-card">
-              <div class="evidence-level">실행의도 근거</div>
-              <h3>If-Then 상담 스크립트</h3>
-              <p>“대형센터에서 방치됐다면 체형평가”, “가격만 묻는다면 결과 리포트 체험권”처럼 상황별 다음 행동을 고정합니다.</p>
+              <div class="evidence-level">8주 후</div>
+              <h3>재등록 리포트 제안</h3>
+              <p>8주 종료 전 자세사진, 운동 수행표, 출석률을 묶어 학부모에게 보여주고 다음 8주 목표를 제안합니다.</p>
               <ul>
-                <li>담당: 상담 담당자</li>
-                <li>측정: 상담유형, 제안횟수, 체험권 결제, 본등록 전환</li>
-                <li>판정: 유형별 전환율이 낮으면 질문 순서 수정</li>
+                <li>담당: 대표+담당 강사</li>
+                <li>측정: 재등록 상담, 재등록 결제</li>
+                <li>판정: 재등록률 35% 이상</li>
               </ul>
             </div>
           </div>
